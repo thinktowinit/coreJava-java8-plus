@@ -17,7 +17,7 @@ public class MyLocalDateOperations {
 
 		LocalDate todayDate = LocalDate.now();
 
-		System.out.println(todayDate);
+		System.out.println("Today date "+todayDate);
 		return todayDate;
 	}
 
@@ -26,7 +26,7 @@ public class MyLocalDateOperations {
 
 		LocalTime currentTime = LocalTime.now();
 
-		System.out.println(currentTime);
+		System.out.println("present time "+currentTime);
 		return currentTime;
 
 	}
@@ -35,29 +35,25 @@ public class MyLocalDateOperations {
 		// TODO Auto-generated method stub
 
 		LocalDateTime currentDateTime = LocalDateTime.now();
-
-		return currentDateTime;
+		System.out.println("localDateTime Default Format = " + currentDateTime);
+		return currentDateTime; //2025-7-22 09:02:22
 
 	}
 
-	private static String getDateUsingDateTimeFormatter(LocalDateTime localDateTime) {
-		// TODO Auto-generated method stub
-
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(CoreJavaConstants.DATE_TIME_FORMATTER);
+	private static String getDateUsingDateTimeFormatter(LocalDateTime localDateTime, String formatter) {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(formatter);
 		String formatedDate = localDateTime.format(dateTimeFormatter);
 		return formatedDate;
-
 	}
 
 	public static Month getCurrentMonth() {
 		// TODO Auto-generated method stub
 
 		return getCurrentDateTime().getMonth();
-
+		     //(2025-7-22 09:02:22).getMonth() = JULY
 	}
 
 	private static int getToday() {
-		// TODO Auto-generated method stub
 
 		return getCurrentDateTime().getDayOfMonth();
 
@@ -73,7 +69,7 @@ public class MyLocalDateOperations {
 	private static LocalDate getSpecifiedDate() {
 		// TODO Auto-generated method stub
 
-		LocalDate localDate = LocalDate.of(2023, 05, 14);
+		LocalDate localDate = LocalDate.of(1993, 1, 26); //1993-01-26
 		return localDate;
 
 	}
@@ -83,6 +79,7 @@ public class MyLocalDateOperations {
 		LocalDate localDateToday = getTodayDate();
 		LocalDate localDate2 = LocalDate.of(2023, Month.MAY, 14);
 		Period period = Period.between(localDate2, localDateToday);
+		System.out.println(period.getDays() + "  days, " + period.getMonths() + " months, " + period.getYears() + " years");
 		return period;
 
 	}
@@ -95,34 +92,54 @@ public class MyLocalDateOperations {
 
 		System.out.println(" after5Hours = " + after5Hours);
 		Duration durationBetweenTimes = Duration.between(after5Hours, currentTime);
-		System.out.println(durationBetweenTimes);
+		System.out.println("duration between above times "+durationBetweenTimes);
 		return durationBetweenTimes;
 
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		getTodayDate();
-		getCurrentTime();
-
-		LocalDateTime localDateTimeDefaultFormat = getCurrentDateTime();
-		System.out.println("localDateTime Default Format = " + localDateTimeDefaultFormat);
-
-		// display date in format of DATE_TIME_FORMATTER
+		//getTodayDate();
+		//getCurrentTime();
+//
+		//LocalDateTime localDateTimeDefaultFormat = getCurrentDateTime();
+		
+//
+//	    display date in format of DATE_TIME_FORMATTER
 
 		LocalDateTime localDateTime = getCurrentDateTime();
-		String dateAFterFornatted = getDateUsingDateTimeFormatter(localDateTime);
-		System.out.println("In my own format = " + dateAFterFornatted);
-
-		System.out.println(getCurrentMonth());
-		System.out.println(getToday());
-		System.out.println(getSeconds());
-		System.out.println(getSpecifiedDate());
-		Period period = getDifferenceBetweenDates();
-		System.out.println(
-				period.getDays() + "  days, " + period.getMonths() + " months, " + period.getYears() + " years");
+//		String dateAFterFornatted = getDateUsingDateTimeFormatter(localDateTime, CoreJavaConstants.DATE_TIME_FORMATTER);
+//		System.out.println("In my own format = " + dateAFterFornatted);
+//		String dateAFterFornatted2 = getDateUsingDateTimeFormatter(localDateTime, CoreJavaConstants.DATE_TIME_FORMATTER2);
+//		System.out.println("In my own format2 = " + dateAFterFornatted2);
+//		String dateAFterFornatted3 = getDateUsingDateTimeFormatter(localDateTime, CoreJavaConstants.DATE_TIME_FORMATTER3);
+//		System.out.println("In my own format3 = " + dateAFterFornatted3);
+//		String dateAFterFornatted4 = getDateUsingDateTimeFormatter(localDateTime, CoreJavaConstants.DATE_TIME_FORMATTER4);
+//		System.out.println("In my own format4 = " + dateAFterFornatted4);
+//
+//		System.out.println(getCurrentMonth());
+//		System.out.println(getToday());
+//		System.out.println(getSeconds());
+//		System.out.println(getSpecifiedDate());
+//		getDifferenceBetweenDates();
 		getDifferenceBetweenTimes();
+		
+		LocalDate specifiedDate = LocalDate.of(2025, 5, 22);
+		getSpecifiedDateWithCurrentTime(specifiedDate);
 
+	}
+
+	private static void getSpecifiedDateWithCurrentTime(LocalDate specifiedDate) {
+		// TODO Auto-generated method stub
+		
+		  LocalTime currentTime = LocalTime.now();
+
+	        // Combine specified date with current time
+	        LocalDateTime combinedDateTime = LocalDateTime.of(specifiedDate, currentTime);
+
+	        // Print the result
+	        System.out.println("Specified date with current time: " + combinedDateTime);
+		
 	}
 
 }
