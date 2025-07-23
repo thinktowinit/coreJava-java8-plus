@@ -1,5 +1,6 @@
 package com.entity;
 
+
 import java.util.List;
 
 public class Doctor {
@@ -87,3 +88,4 @@ public class Doctor {
 	}
 
 }
+

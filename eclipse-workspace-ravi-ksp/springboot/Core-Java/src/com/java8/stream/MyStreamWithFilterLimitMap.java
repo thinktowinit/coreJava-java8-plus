@@ -22,6 +22,10 @@ public class MyStreamWithFilterLimitMap {
 		getEmpNamesWhoIsAdminAndHisSalaryGreaterThan6000();
 		getEmpIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000();
 		getEmpIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000();
+		
+		getEmpIdWhoseSalaryGreaterThan3000method2(list);
+		
+		
 
 	}
 
@@ -30,6 +34,14 @@ public class MyStreamWithFilterLimitMap {
 		List<String> listOfEmpNames = list.stream().filter(employee -> employee.getSalary() % 3 == 0).limit(3)
 				.map(emp -> emp.getName()).collect(Collectors.toList());
 		listOfEmpNames.forEach(System.out::println);
+	}
+	
+	
+	public static List<Integer> getEmpIdWhoseSalaryGreaterThan3000method2(List<Employee> list) {
+		
+		List<Integer> listOfEmpIds = list.stream().filter(emp -> emp.getSalary() > 3000).map(emp -> emp.getId())
+				.collect(Collectors.toList());
+		return listOfEmpIds;
 	}
 
 	private static void getEmpIdWhoseSalaryGreaterThan3000() {
@@ -43,7 +55,9 @@ public class MyStreamWithFilterLimitMap {
 
 		// if not used listOfId's other places
 		System.out.println("getEmpIdWhoseSalaryGreaterThan3000============");
-		list.stream().filter(emp -> emp.getSalary() > 3000).map(emp -> emp.getId()).collect(Collectors.toList())
+		list.stream()
+		.filter(emp -> emp.getSalary() > 3000)
+		.map(emp -> emp.getId()).collect(Collectors.toList())
 				.forEach(System.out::println);
 	}
 
