@@ -7,9 +7,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.collections.arraylistcode.MyDataBaseUtil;
+import com.constants.CoreJavaConstants;
 import com.employee.Employee;
 
 public class MyStreamWithFilterLimitMap {
+
+	private static final String O_NEGATIVE = "ONegative";
+
+
 //get emp names whose salary divided by with 3 and get maximun 3 employees
 
 	public static void main(String[] args) {
@@ -61,13 +66,24 @@ public class MyStreamWithFilterLimitMap {
 				.forEach(System.out::println);
 	}
 
+	/**
+	 * 
+	 * Get gender deatils whose names length greater than 6
+	 */
 	private static void getGenderWhoseNamesLenthGreaterThan6() {
 		// TODO Auto-generated method stub
-		List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
-		List<String> listOfGenders = list.stream().filter(emp -> emp.getName().length() > 6).map(emp -> emp.getGender())
-				.collect(Collectors.toList());
-		System.out.println("getGenderWhoseNamesLenthGreaterThan6==========");
-		listOfGenders.forEach(System.out::println);
+		
+		try {
+			List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
+			List<String> listOfGenders = list.stream().filter(emp -> emp.getName().length() > CoreJavaConstants.NAME_LENGTH).map(emp -> emp.getGender())
+					.collect(Collectors.toList());
+			System.out.println("getGenderWhoseNamesLenthGreaterThan6==========");
+			listOfGenders.forEach(System.out::println);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error at getGenderWhoseNamesLenthGreaterThan6 "+e.getMessage());
+		}
 
 	}
 
@@ -89,7 +105,7 @@ public class MyStreamWithFilterLimitMap {
 
 		List<Integer> listOfEmpIds = list
 				.stream().filter(emp -> (emp.getBloodGroup() != null
-						&& "ONegative".equalsIgnoreCase(emp.getBloodGroup()) && emp.getBloodGroupPrice() < 6000))
+						&& O_NEGATIVE.equalsIgnoreCase(emp.getBloodGroup()) && emp.getBloodGroupPrice() < 6000))
 				.map(emp -> emp.getId()).collect(Collectors.toList());
 		System.out.println("getEmpIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000===========");
 		listOfEmpIds.forEach(System.out::println);
@@ -102,7 +118,7 @@ public class MyStreamWithFilterLimitMap {
 		List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
 
 		Map<Integer, String> listOfEmpIdWithNames = list.stream()
-				.filter(emp -> (emp.getBloodGroup() != null && "ONegative".equalsIgnoreCase(emp.getBloodGroup())
+				.filter(emp -> (emp.getBloodGroup() != null && CoreJavaConstants.O_NEGATIVE.equalsIgnoreCase(emp.getBloodGroup())
 						&& emp.getBloodGroupPrice() < 6000))
 				.collect(Collectors.toMap(Employee::getId, Employee::getName, (x, y) -> x + ", " + y,
 						LinkedHashMap::new));
