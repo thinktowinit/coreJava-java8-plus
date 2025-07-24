@@ -38,8 +38,8 @@ public static List<Integer> getWorkerIdWhoseSalaryGreaterThan3000(List<Worker> l
 	}
 
 private static void getWorkerNamesWhoIsAdminAndHisSalaryGreaterThan6000() {
-	// TODO Auto-generated method stub
 	try {
+		System.out.println("getWorkerNamesWhoIsAdminAndHisSalaryGreaterThan6000 started");
 		List<Worker> list = MyDataBaseWorkerUtil.getListOfWorker(new ArrayList<>());
 		// if(x>10 && x%2==0) //x=20 // 2)20(10 //reminder = 0
 
