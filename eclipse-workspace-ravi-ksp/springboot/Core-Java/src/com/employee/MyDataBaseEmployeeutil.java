@@ -1,4 +1,6 @@
-package com.collections.arraylistcode;
+package com.employee;
+
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import com.employee.Employee;
-
-public class MyDataBaseUtil {
+public class MyDataBaseEmployeeutil {
 
 	public final static String filePathFromStudentTableFromDb = "C:\\Users\\ADMIN\\Documents\\java11\\folder-1\\write-data.txt";
 	public final static String filePatchFromTeacherTableFromDb = "C:\\Users\\ADMIN\\Documents\\java11\\folder-1\\write-data.txt";
@@ -71,7 +71,7 @@ public class MyDataBaseUtil {
 		
 		Employee employee61 = new Employee();
 		employee61.setId(5);
-		employee61.setName("Nagesh Reddy5");
+		//employee6.setName("Nagesh Reddy5");
 		employee61.setGender("Male");
 		employee61.setSalary(6000);
 		employee61.setAdmin(true);
