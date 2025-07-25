@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import com.enums.BloodGroup;
 
-public class MyStreamWithFilterLimitMap {
+public class MyStreamWithFilterLimitMapFarmer {
 	//private static final String O_NEGATIE = "ONegative";
 
 
@@ -16,6 +16,7 @@ public class MyStreamWithFilterLimitMap {
 		getFarmerDetailsWhoIsAdminAndYearlyIncomeGreaterThan30000();
 		getFarmerIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan10000();
 		getFarmerIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan10000();
+		
 
 	}
 
