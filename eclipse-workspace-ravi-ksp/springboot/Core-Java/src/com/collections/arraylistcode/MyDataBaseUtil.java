@@ -209,7 +209,6 @@ public class MyDataBaseUtil {
 		hashMap.put(17, "well");
 		hashMap.put(2, "well");
 		hashMap.put(8, "well");
-
 		return hashMap;
 
 	}
