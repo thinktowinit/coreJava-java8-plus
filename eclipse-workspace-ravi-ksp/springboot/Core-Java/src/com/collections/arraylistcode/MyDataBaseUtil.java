@@ -71,7 +71,7 @@ public class MyDataBaseUtil {
 		
 		Employee employee61 = new Employee();
 		employee61.setId(5);
-		//employee6.setName("Nagesh Reddy5");
+		employee61.setName("Nagesh Reddy5");
 		employee61.setGender("Male");
 		employee61.setSalary(6000);
 		employee61.setAdmin(true);
@@ -209,7 +209,6 @@ public class MyDataBaseUtil {
 		hashMap.put(17, "well");
 		hashMap.put(2, "well");
 		hashMap.put(8, "well");
-
 		return hashMap;
 
 	}
