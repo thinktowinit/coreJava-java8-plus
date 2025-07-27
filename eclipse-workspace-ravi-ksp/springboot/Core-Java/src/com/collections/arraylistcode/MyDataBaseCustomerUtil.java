@@ -35,6 +35,9 @@ public class MyDataBaseCustomerUtil {
 			c1.setCustomerId(6);
 			c1.setGender("female");
 			c1.setSalary(900);
+			c1.setCustomerId(1);
+			c1.setGender("female");
+			c1.setSalary(2200);
 			c1.setAdmin(true);
 			c1.setBloodGroup(BloodGroup.O_NEGATIE);
 			c1.setBloodGroupPrice(3000);

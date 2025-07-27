@@ -76,8 +76,6 @@ public class Customer {
 	public void setFamilyMembers(List<String> familyMembers) {
 		this.familyMembers = familyMembers;
 	}
-	
-	 
-    
+	   
 	
 }

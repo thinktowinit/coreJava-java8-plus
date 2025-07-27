@@ -9,98 +9,99 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import com.employee.Employee;
+import com.entity.Worker;
 
-public class MyDataBaseUtil {
-
-	public final static String filePathFromStudentTableFromDb = "C:\\Users\\ADMIN\\Documents\\java11\\folder-1\\write-data.txt";
-	public final static String filePatchFromTeacherTableFromDb = "C:\\Users\\ADMIN\\Documents\\java11\\folder-1\\write-data.txt";
-
-	public static List<Employee> getListOfEmployees(List listBox) {
+public class MyDataBaseWorkerUtil {
+	
+	
+	
+	public static List<Worker> getListOfWorker(List listBox) {
 		// TODO Auto-generated method stub
 
-		return createEmployeeAndAddToList(listBox);
+		return createWorkerAndAddToList(listBox);
 
 	}
 
-	private static List<Employee> createEmployeeAndAddToList(List listBox) {
+	private static List<Worker> createWorkerAndAddToList(List listBox) {
+		// TODO Auto-generated method stub
+		//Employee employee1 = new Employee();
+		Worker worker1 = new Worker();
+		worker1.setName("TTW");
+		worker1.setId(1);
+        worker1.setAdmin(true);
+		worker1.setSalary(22000);
+		worker1.setGender("Male");
+		worker1.setBloodGroup("oNegative");
+		worker1.setBloodGroupPrice(2000);
+		worker1.setAge(22);
 
-		Employee employee1 = new Employee();
-		employee1.setName("TTW");
-		employee1.setId(1);
-		employee1.setAdmin(true);
-		employee1.setSalary(22000);
-		employee1.setGender("Male");
-		employee1.setBloodGroup("oNegative");
-		employee1.setBloodGroupPrice(2000);
-		employee1.setAge(22);
+		Worker worker2 = new Worker();
+		worker2.setId(2);
+		worker2.setName("TTW");
+		worker2.setGender("Male");
+		worker2.setSalary(3300);
+		worker2.setAdmin(false);
+		worker2.setAge(23);
 
-		Employee employee2 = new Employee();
-		employee2.setId(2);
-		employee2.setName("TTW");
-		employee2.setGender("Male");
-		employee2.setSalary(3300);
-		employee2.setAdmin(false);
-		employee2.setAge(23);
+		Worker worker3 = new Worker();
+		worker3.setName("Naveen Reddy");
+		worker3.setGender("Male");
+		worker3.setId(3);
+		worker3.setSalary(6600);
+		worker3.setAdmin(true);
+		worker3.setBloodGroupPrice(2000);
+		worker3.setBloodGroup("oPossitie");
 
-		Employee employee3 = new Employee();
-		employee3.setName("Naveen Reddy");
-		employee3.setGender("Male");
-		employee3.setId(3);
-		employee3.setSalary(6600);
-		employee3.setAdmin(true);
-		employee3.setBloodGroup("oPossitie");
-		employee3.setBloodGroupPrice(2000);
-
-		Employee employee4 = new Employee();
-		employee4.setName("Abi"); // 7
-		employee4.setSalary(990);
-		employee4.setBloodGroupPrice(990);
-		employee4.setBloodGroup("oNegative");
-		employee4.setGender("Female");
-		employee4.setAge(25);
-		employee4.setId(4);
-		employee4.setAdmin(true);
-		Employee employee5 = new Employee();
-		employee5.setId(5);
-		employee5.setName("Nagesh Reddy5");
-		employee5.setGender("Male");
-		employee5.setSalary(6000);
-		employee5.setAdmin(true);
+		Worker worker4 = new Worker();
+		worker4.setName("Abi"); // 7
+		worker4.setSalary(990);
+		worker4.setBloodGroupPrice(990);
+		worker4.setBloodGroup("oNegative");
+		worker4.setGender("Female");
+		worker4.setAge(25);
+		worker4.setId(4);
+		worker4.setAdmin(true);
+		
+		Worker worker5 = new Worker();
+		worker5.setId(5);
+		worker5.setName("Nagesh Reddy5");
+		worker5.setGender("Male");
+		worker5.setSalary(6000);
+		worker5.setAdmin(true);
 		
 		
-		Employee employee61 = new Employee();
-		employee61.setId(5);
-		//employee6.setName("Nagesh Reddy5");
-		employee61.setGender("Male");
-		employee61.setSalary(6000);
-		employee61.setAdmin(true);
+		Worker worker6 = new Worker();
+		worker6.setId(5);
+		worker6.setName("Nagesh Reddy5");
+		worker6.setGender("Male");
+		worker6.setSalary(6000);
+		worker6.setAdmin(true);
 
-		listBox.add(employee3);
-		listBox.add(employee2);
-		listBox.add(employee1);
-		listBox.add(employee4);
-		listBox.add(employee5);
-		listBox.add(employee61);
+		listBox.add(worker3);
+		listBox.add(worker2);
+		listBox.add(worker1);
+		listBox.add(worker4);
+		listBox.add(worker5);
+		listBox.add(worker6);
 		
-		Employee employee6 = new Employee();
-		employee6.setId(5);
-		employee6.setName("Abc Reddy5");
-		employee6.setGender("Transgender");
-		employee6.setSalary(6000);
-		employee6.setAdmin(true);
-		employee6.setAge(15);
+		Worker worker7 = new Worker();
+		worker7.setId(5);
+		worker7.setName("Abc Reddy5");
+		worker7.setGender("Transgender");
+		worker7.setSalary(6000);
+		worker7.setAdmin(true);
+		worker7.setAge(15);
 		
-		listBox.add(employee6);
+		listBox.add(worker7);
 
 		return listBox;
 	}
 
-	public static Set<Employee> getSetOfEmployees(List listBox) {
-		Set<Employee> setOfEmployees = new HashSet<>();
-		List list = createEmployeeAndAddToList(listBox); // 4
-		setOfEmployees.addAll(list); // 4
-		return setOfEmployees;
+	public static Set<Worker> getSetOfWorker(List listBox) {
+		Set<Worker> setOfWorker = new HashSet<>();
+		List list = createWorkerAndAddToList(listBox); // 4
+		setOfWorker.addAll(list); // 4
+		return setOfWorker;
 
 	}
 
@@ -209,6 +210,7 @@ public class MyDataBaseUtil {
 		hashMap.put(17, "well");
 		hashMap.put(2, "well");
 		hashMap.put(8, "well");
+
 		return hashMap;
 
 	}
@@ -219,4 +221,8 @@ public class MyDataBaseUtil {
 
 	}
 
-}
+	}
+
+
+	
+
