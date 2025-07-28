@@ -1,5 +1,7 @@
 package com.employee;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 //@getterssetters
@@ -9,10 +11,25 @@ public class Employee {
 	private String name;
 	private int salary;
 	private String gender;
+	public LocalDate getJoiningDatee() {
+		return joiningDatee;
+	}
+	public void setJoiningDatee(LocalDate joiningDatee) {
+		this.joiningDatee = joiningDatee;
+	}
+	public LocalDateTime getJoiningDate() {
+		return joiningDate;
+	}
+	public void setJoiningDate(LocalDateTime joiningDate) {
+		this.joiningDate = joiningDate;
+	}
 	private boolean isAdmin;
 	private String bloodGroup;
 	private int bloodGroupPrice;
 	private int age;
+	
+	private LocalDate joiningDatee;
+    private LocalDateTime joiningDate;
 	private List<String> frindNames;
 	public int getId() {
 		return id;
