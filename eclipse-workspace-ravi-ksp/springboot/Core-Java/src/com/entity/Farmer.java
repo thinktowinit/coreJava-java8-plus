@@ -3,7 +3,9 @@ package com.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import com.enums.BloodGroup;
 
@@ -14,22 +16,24 @@ public class Farmer {
 	private String gender;
 	private String village;
 	private String mobileNumber;
-	private String landArea; // Example: "5 Acres"
-	private String landType; // Example: "Fertile", "Dry"
-	private String cropType; // Example: "Paddy", "Wheat"
-	private Double yearlyIncome; // i took like as a salary
+	private String landArea;
+	private String landType;
+	private String cropType;
+	private Double yearlyIncome;
 	private boolean isLoanTaken;
 	private double loanAmount;
 	private String bankName;
 	private String aadharNumber;
 	private String rationCardNumber;
 	private boolean isAdmin;
-	private BloodGroup bloodGroup;// // Enum type instead of String
+	private BloodGroup bloodGroup;
 	private int bloodGroupPrice;
-	private LocalDateTime joiningDate; // Used for experience/time-based tasks
+	private LocalDateTime joiningDate;
 
 	private List<String> familyMembersNames;
 
+	public Farmer() {
+	}
 
 	public int getId() {
 		return id;
@@ -191,19 +195,23 @@ public class Farmer {
 		this.familyMembersNames = familyMembersNames;
 	}
 
-
-	// if u need or You can add constructor, getters, setters as needed
-	
-	public int getExperience() {
-	    if (joiningDate == null) 
-	        return 0;
-	    return Period.between(joiningDate.toLocalDate(), LocalDate.now()).getYears();
-	}
-
-
 	@Override
 	public String toString() {
-	    return "Farmer{id=" + id + ", name='" + name + "', experience=" + getExperience() + " years}";
+		return "Farmer [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", village=" + village
+				+ ", mobileNumber=" + mobileNumber + ", landArea=" + landArea + ", landType=" + landType + ", cropType="
+				+ cropType + ", yearlyIncome=" + yearlyIncome + ", isLoanTaken=" + isLoanTaken + ", loanAmount="
+				+ loanAmount + ", bankName=" + bankName + ", aadharNumber=" + aadharNumber + ", rationCardNumber="
+				+ rationCardNumber + ", isAdmin=" + isAdmin + ", bloodGroup=" + bloodGroup + ", bloodGroupPrice="
+				+ bloodGroupPrice + ", joiningDate=" + joiningDate + ", familyMembersNames=" + familyMembersNames + "]";
 	}
+
+
+
+//	@Override
+//	public String toString() {
+//		return "Farmer{id=" + id + ", name='" + name + "', experience=" + getExperience() + " years}";
+//	}
+
+	
 
 }
