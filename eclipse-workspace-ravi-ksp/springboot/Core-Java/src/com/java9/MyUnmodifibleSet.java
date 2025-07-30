@@ -11,13 +11,13 @@ public class MyUnmodifibleSet {
 	public static void main(String[] args) {
 
 		//get employees list, after get emp list , dont add any data.
-		Set<Employee> set = MyDataBaseUtil.getSetOfEmployees(new ArrayList());
+		Set<Employee> mutableSet = MyDataBaseUtil.getSetOfEmployees(new ArrayList());
 		
 		//Don't modify the result
 		
-		Set set2 = Set.of(set); //now set2 not allowed any modifications
-		
-		set2.add(new Employee());
+		Set immutableSet = Set.of(mutableSet); //now set2 not allowed any modifications
+		System.out.println("=============="+immutableSet);
+		immutableSet.add(new Employee()); //Exception in thread "main" java.lang.UnsupportedOperationException
 		System.out.println("==============");
 
 	}
