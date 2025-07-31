@@ -28,12 +28,11 @@ public class Farmer {
 	private boolean isAdmin;
 	private BloodGroup bloodGroup;
 	private int bloodGroupPrice;
-	private LocalDateTime joiningDate;
+	private LocalDateTime joiningDateTime;
 
 	private List<String> familyMembersNames;
 
-	public Farmer() {
-	}
+	
 
 	public int getId() {
 		return id;
@@ -180,11 +179,11 @@ public class Farmer {
 	}
 
 	public LocalDateTime getJoiningDate() {
-		return joiningDate;
+		return joiningDateTime;
 	}
 
 	public void setJoiningDate(LocalDateTime localDateTime) {
-		this.joiningDate = localDateTime;
+		this.joiningDateTime = localDateTime;
 	}
 
 	public List<String> getFamilyMembersNames() {
@@ -195,22 +194,10 @@ public class Farmer {
 		this.familyMembersNames = familyMembersNames;
 	}
 
-	@Override
-	public String toString() {
-		return "Farmer [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", village=" + village
-				+ ", mobileNumber=" + mobileNumber + ", landArea=" + landArea + ", landType=" + landType + ", cropType="
-				+ cropType + ", yearlyIncome=" + yearlyIncome + ", isLoanTaken=" + isLoanTaken + ", loanAmount="
-				+ loanAmount + ", bankName=" + bankName + ", aadharNumber=" + aadharNumber + ", rationCardNumber="
-				+ rationCardNumber + ", isAdmin=" + isAdmin + ", bloodGroup=" + bloodGroup + ", bloodGroupPrice="
-				+ bloodGroupPrice + ", joiningDate=" + joiningDate + ", familyMembersNames=" + familyMembersNames + "]";
-	}
+	
 
 
 
-//	@Override
-//	public String toString() {
-//		return "Farmer{id=" + id + ", name='" + name + "', experience=" + getExperience() + " years}";
-//	}
 
 	
 

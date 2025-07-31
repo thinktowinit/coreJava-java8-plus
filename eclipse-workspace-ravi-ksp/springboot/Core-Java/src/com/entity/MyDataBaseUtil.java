@@ -82,7 +82,7 @@ public class MyDataBaseUtil {
 		farmer3.setCropType("Kharif");
 		farmer3.setYearlyIncome(70000);
 		farmer2.setBloodGroup(BloodGroup.O_NEGATIE);
-		farmer3.setJoiningDate(LocalDateTime.of(2024, 6, 28, 6, 55, 23));
+		farmer3.setJoiningDate(LocalDateTime.of(2019, 5, 10, 00, 00, 00));
 		farmer3.setBloodGroupPrice(4000);
 		farmer3.setAdmin(true);
 		farmer3.setLoanTaken(true);

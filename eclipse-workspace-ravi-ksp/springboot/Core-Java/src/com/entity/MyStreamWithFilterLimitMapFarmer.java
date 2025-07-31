@@ -22,8 +22,13 @@ public class MyStreamWithFilterLimitMapFarmer {
 	private static final String ERROR_MSG = "Getting Error while filtering admin farmers with income > 30000: ";
 	private static final String SUCCESS_MSG = "======[SUCCESS] First farmer name whose yearly income > 1000: ";
 	private static final String ERROR_MSG1 = "==========[ERROR] No farmer found or error occurred while fetching farmer name.";
-
-
+	
+	private static final String successMsg = "Success: Fetched max 3 farmers with experience > 1 year.";
+	private static final String headerMsg = "============= Experienced Farmers List =============";
+	private static final String errorPrefix = " Error occurred while fetching experienced farmers: ";
+	
+	private static final String SUCCESS_MSG12 = "=========== Farmer ID and Yearly Income List ===========";
+	private static final String ERROR_MSG12 = "============= No farmers found or an error occurred while fetching data.";
 	public static void main(String[] args) {
 		List<Farmer> list = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
 		TaskOneMethods();
@@ -345,28 +350,33 @@ public class MyStreamWithFilterLimitMapFarmer {
 	
 	/**
 	 * Task2.4. This method fetches a maximum of 3 farmers whose experience is greater than 1 year.
+	 * It uses Java 8 features including Optional and Stream API.
 	 */
 	private static void getFarmersWithExperienceGreaterThan1Year() {
 		try {
-			Optional.ofNullable(MyDataBaseUtil.getListOfFarmers(new ArrayList<>()))
-				.filter(list -> !list.isEmpty())
-				.map(list -> list.stream()
-					.filter(farmer -> Optional.ofNullable(farmer.getJoiningDate())
-						.map(date -> Period.between(date.toLocalDate(), LocalDate.now()).getYears())
-						.filter(years -> years > 1)
-						.isPresent())
-					.limit(3)
-					.toList())
-				.filter(list -> !list.isEmpty())
-				.ifPresent(experiencedFarmers -> {
-					System.out.println("============= Fetched max 3 farmers with experience > 1 year.");
-					experiencedFarmers.forEach(System.out::println);
-				});
+			List<Farmer> farmersList = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
+
+			Optional.ofNullable(farmersList).filter(list -> !list.isEmpty())
+					.map(list -> list.stream().filter(farmer -> Optional.ofNullable(farmer.getJoiningDate())
+							.map(joiningDate -> Period.between(joiningDate.toLocalDate(), LocalDate.now()).getYears())
+							.filter(years -> years > 1).isPresent()).limit(3).collect(Collectors.toList()))
+					.filter(filteredList -> !filteredList.isEmpty()).ifPresent(experiencedFarmers -> {
+						System.out.println(successMsg);
+						System.out.println(headerMsg);
+						experiencedFarmers.forEach(farmer -> {
+							String output = "id=" + farmer.getId() + ", name='" + farmer.getName() + "'"
+									+ ", joiningDate=" + farmer.getJoiningDate();
+							System.out.println(output);
+						});
+					});
+
 		} catch (Exception e) {
-			System.err.println("Error while fetching experienced farmers: " + e.getMessage());
+			String errorMsg = " Error occurred while fetching experienced farmers: " + e.getMessage();
+			System.err.println(errorMsg);
 			e.printStackTrace();
 		}
 	}
+
 
 	/**
 	 *Task2. 5.This method fetches the first farmer name whose yearly income is greater than 1000.
@@ -393,31 +403,35 @@ public class MyStreamWithFilterLimitMapFarmer {
 	}
 	
 	/**
-	 *Task2.6. This method prints the ID and yearly income of all farmers from the database.
-	 * It uses Optional, Stream API, and SimpleEntry for clean and safe data processing.
-	 *  Java 8 compatible and clean.
+	 * Task2.6. This method prints the ID and yearly income of all farmers from the
+	 * database. It uses Optional, Stream API, and SimpleEntry for clean and safe
+	 * data processing. Java 8 compatible and clean.
+	 * 
+	 * Convert each Farmer object into a key-value pair using
+	 * AbstractMap.SimpleEntry where the key is the Farmer's ID and the value is the
+	 * Farmer's Yearly Income. This allows us to work with paired data (ID → Income)
+	 * without creating a custom class. AbstractMap.SimpleEntry is a convenient
+	 * built-in way to represent a Map.Entry<K, V> structure.
 	 */
 	private static void GetFarmersIDAndYearlyIncome() {
-	    final String SUCCESS_MSG = "=========== Farmer ID and Yearly Income List ===========";
-	    final String ERROR_MSG = "============= No farmers found or an error occurred while fetching data.";
 
 	    try {
-	        List<Farmer> farmers = Optional.ofNullable(MyDataBaseUtil.getListOfFarmers(new ArrayList<>()))
-	                                       .orElse(new ArrayList<>());
+	        Optional.ofNullable(MyDataBaseUtil.getListOfFarmers(new ArrayList<>()))
+	            .filter(farmers -> !farmers.isEmpty())
+	            .ifPresentOrElse(farmers -> {
+	                System.out.println(SUCCESS_MSG12);
+	                farmers.stream()
+	                    .map(farmer -> new AbstractMap.SimpleEntry<>(farmer.getId(), farmer.getYearlyIncome()))
+	                    .map(entry -> String.format("Farmer ID: %d, Yearly Income: ₹%.2f", entry.getKey(), entry.getValue()))
+	                    .forEach(System.out::println);
+	            }, () -> System.out.println(ERROR_MSG12));
 
-	        if (!farmers.isEmpty()) {
-	            System.out.println(SUCCESS_MSG);
-	            farmers.stream()
-	                   .map(farmer -> new AbstractMap.SimpleEntry<>(farmer.getId(), farmer.getYearlyIncome()))
-	                   .map(entry -> String.format("Farmer ID: %d, Yearly Income: ₹%.2f", entry.getKey(), entry.getValue()))
-	                   .forEach(System.out::println); 
-	        } else {
-	            System.out.println(ERROR_MSG);
-	        }
 	    } catch (Exception e) {
-	        System.out.println(ERROR_MSG);
+	        System.out.println(ERROR_MSG12);
 	    }
 	}
+	
+
 	
 	
 	/**
