@@ -1,5 +1,6 @@
 package com.collections.arraylistcode;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,53 +30,73 @@ public class MyDataBaseWorkerUtil {
 		worker1.setName("TTW");
 		worker1.setId(1);
         worker1.setAdmin(true);
-		worker1.setSalary(22000);
+		worker1.setSalary((double) 22000);
 		worker1.setGender("Male");
 		worker1.setBloodGroup("oNegative");
 		worker1.setBloodGroupPrice(2000);
 		worker1.setAge(22);
+		worker1.setExperience(2);
+		worker1.setJoinDate(LocalDate.of(2023, 5, 1));
+		
+		
+		
+		
+		
+		
+		
+		
 
 		Worker worker2 = new Worker();
+		worker2.setExperience(1);
 		worker2.setId(2);
 		worker2.setName("TTW");
 		worker2.setGender("Male");
-		worker2.setSalary(3300);
+		worker2.setSalary((double) 3300);
 		worker2.setAdmin(false);
 		worker2.setAge(23);
+		worker2.setJoinDate(LocalDate.of(2024, 7, 15));
 
 		Worker worker3 = new Worker();
+		worker3.setExperience(3);
 		worker3.setName("Naveen Reddy");
 		worker3.setGender("Male");
 		worker3.setId(3);
-		worker3.setSalary(6600);
+		worker3.setSalary((double) 6600);
 		worker3.setAdmin(true);
 		worker3.setBloodGroupPrice(2000);
 		worker3.setBloodGroup("oPossitie");
+		worker3.setJoinDate(LocalDate.of(2022, 3, 10));
 
 		Worker worker4 = new Worker();
+		worker4.setExperience(5);
 		worker4.setName("Abi"); // 7
-		worker4.setSalary(990);
+		worker4.setSalary((double) 990);
 		worker4.setBloodGroupPrice(990);
 		worker4.setBloodGroup("oNegative");
 		worker4.setGender("Female");
 		worker4.setAge(25);
 		worker4.setId(4);
 		worker4.setAdmin(true);
+		worker4.setJoinDate(LocalDate.of(2019, 11, 5));
 		
 		Worker worker5 = new Worker();
+		worker5.setExperience(0);
 		worker5.setId(5);
 		worker5.setName("Nagesh Reddy5");
 		worker5.setGender("Male");
-		worker5.setSalary(6000);
+		worker5.setSalary((double) 6000);
 		worker5.setAdmin(true);
+		worker5.setJoinDate(LocalDate.of(2025, 1, 20));
 		
 		
 		Worker worker6 = new Worker();
+		worker6.setExperience(2);
 		worker6.setId(5);
 		worker6.setName("Nagesh Reddy5");
 		worker6.setGender("Male");
-		worker6.setSalary(6000);
+		worker6.setSalary((double) 6000);
 		worker6.setAdmin(true);
+		worker6.setJoinDate(LocalDate.of(2023, 1, 10));
 
 		listBox.add(worker3);
 		listBox.add(worker2);
@@ -88,9 +109,11 @@ public class MyDataBaseWorkerUtil {
 		worker7.setId(5);
 		worker7.setName("Abc Reddy5");
 		worker7.setGender("Transgender");
-		worker7.setSalary(6000);
+		worker7.setSalary((double) 6000);
 		worker7.setAdmin(true);
 		worker7.setAge(15);
+		worker7.setExperience(1); 
+		worker7.setJoinDate(LocalDate.of(2024, 9, 1));
 		
 		listBox.add(worker7);
 
@@ -220,6 +243,8 @@ public class MyDataBaseWorkerUtil {
 		return new ArrayList<>(Arrays.asList("abc", "ab", null, "a"));
 
 	}
+
+	
 
 	}
 
