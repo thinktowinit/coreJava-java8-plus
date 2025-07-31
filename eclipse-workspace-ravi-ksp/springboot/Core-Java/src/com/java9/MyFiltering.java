@@ -13,13 +13,20 @@ public class MyFiltering {
 	public static void main(String[] args) {
 		List<Employee> empList = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
 
-		//get emp list for each gender wise and should eligible for voting
-		
-		//male, [emp1, emp2]
-		//female, [emp1, emp2]
-
 		Map<String, List<Employee>> map = empList.stream().filter(emp -> emp.getAge() > 18)
 				.collect(Collectors.groupingBy(Employee::getGender));
+		
+		Map<String, List<String>> mapNames = empList.stream()
+			    .filter(emp -> emp.getAge() > 18)
+			    .collect(Collectors.groupingBy(
+			        Employee::getGender,                       // group by gender. key
+			        Collectors.mapping(Employee::getName,      // collect names only
+			                           Collectors.toList())    // as List<String>
+			    ));
+		
+		//display salaries group by gender using java8
+		//display salaries group by gender using java9
+		//display names group by gender using java9
 		
 		System.out.println("beforre java9=======");
 		System.out.println(map);

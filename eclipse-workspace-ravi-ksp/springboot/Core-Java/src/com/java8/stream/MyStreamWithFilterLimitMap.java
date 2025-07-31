@@ -1,9 +1,14 @@
 package com.java8.stream;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.collections.arraylistcode.MyDataBaseUtil;
@@ -37,10 +42,45 @@ public class MyStreamWithFilterLimitMap {
 		getEmpIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000();
 		
 		getEmpIdWhoseSalaryGreaterThan3000method2(list);
-		
+		getFormattedJoiningDateTime(list);
 		
 
 	}
+	
+	
+	private static List<String> getFormattedJoiningDateTime(List<Employee> empList) {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMMM-dd HH:mm:ss.SSS");
+	    LocalTime fixedTime = LocalTime.of(6, 55, 23, 234_000_000);
+
+//	    return empList.stream()
+//	            .map(emp -> {
+//	                LocalDate joiningDate = emp.getJoiningDate(); // Assuming getJoiningDate() returns a LocalDate
+//	                //LocalDateTime joiningDateTime = joiningDate.atStartOfDay(); 00:00:00
+//	                if (joiningDate != null) {
+//	                    LocalDateTime dateTime = LocalDateTime.of(joiningDate, fixedTime);
+//	                    return dateTime.format(formatter);
+//	                } else {
+//	                    return "Joining date not available";
+//	                }
+//	            })
+//	            .collect(Collectors.toList());
+	    
+//	    return empList.stream()
+//	            .map(emp -> Optional.ofNullable(emp.getJoiningDate())
+//	                .map(date -> LocalDateTime.of(date, fixedTime).format(formatter))
+//	                .orElse("Joining date not available"))
+//	            .collect(Collectors.toList());
+	    
+	    
+	    return Optional.ofNullable(empList)
+	            .orElseGet(Collections::emptyList) // Handle null empList
+	            .stream()
+	            .map(emp -> Optional.ofNullable(emp.getJoiningDate())
+	                .map(date -> LocalDateTime.of(date, fixedTime).format(formatter))
+	                .orElse("Joining date not available"))
+	            .collect(Collectors.toList());
+	}
+
 
 	private static void getListOfNamesWhoseSalaryDeidedBy3AndGetMax3Employees(List<Employee> list) {
 		System.out.println(getlistofnames);

@@ -16,15 +16,18 @@ public class HowToUseOrHowToCallDefaultMethods implements MyFunctionalInterface 
 
 		useFunctionalInterface.m2();
 		useFunctionalInterface.sum(2,3);
+		
+		MyFunctionalInterface.multiplicationStatic();
+		
 
 	}
 
 	private void m2() {
 		// TODO Auto-generated method stub
 		// super is indicate to super class object, so not allowed in static methods.
-		MyFunctionalInterface.super.multiplication();
+		
 		System.out.println(this.x);
-
+		MyFunctionalInterface.super.multiplication();
 		// this key word indicates current class object
 
 	}
