@@ -1,6 +1,11 @@
 package com.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import com.enums.BloodGroup;
 
@@ -11,19 +16,23 @@ public class Farmer {
 	private String gender;
 	private String village;
 	private String mobileNumber;
-	private String landArea; // Example: "5 Acres"
-	private String landType; // Example: "Fertile", "Dry"
-	private String cropType; // Example: "Paddy", "Wheat"
-	private int yearlyIncome;  // i took like as a salary
+	private String landArea;
+	private String landType;
+	private String cropType;
+	private Double yearlyIncome;
 	private boolean isLoanTaken;
 	private double loanAmount;
 	private String bankName;
 	private String aadharNumber;
 	private String rationCardNumber;
 	private boolean isAdmin;
-	private BloodGroup bloodGroup;// // Enum type instead of String
+	private BloodGroup bloodGroup;
 	private int bloodGroupPrice;
+	private LocalDateTime joiningDateTime;
+
 	private List<String> familyMembersNames;
+
+	
 
 	public int getId() {
 		return id;
@@ -97,15 +106,13 @@ public class Farmer {
 		this.cropType = cropType;
 	}
 
-	public int getYearlyIncome() {
+	public Double getYearlyIncome() {
 		return yearlyIncome;
 	}
 
-	public void setYearlyIncome(int yearlyIncome) {
-		this.yearlyIncome = yearlyIncome;
+	public void setYearlyIncome(double i) {
+		this.yearlyIncome = i;
 	}
-
-	
 
 	public boolean isAdmin() {
 		return isAdmin;
@@ -171,6 +178,14 @@ public class Farmer {
 		this.rationCardNumber = rationCardNumber;
 	}
 
+	public LocalDateTime getJoiningDate() {
+		return joiningDateTime;
+	}
+
+	public void setJoiningDate(LocalDateTime localDateTime) {
+		this.joiningDateTime = localDateTime;
+	}
+
 	public List<String> getFamilyMembersNames() {
 		return familyMembersNames;
 	}
@@ -181,6 +196,9 @@ public class Farmer {
 
 	
 
-	// if u need or You can add constructor, getters, setters as needed
+
+
+
+	
 
 }

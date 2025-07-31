@@ -1,7 +1,11 @@
 package com.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,23 +16,30 @@ import java.util.TreeMap;
 import com.enums.BloodGroup;
 
 public class MyDataBaseUtil {
+
+
 	public static List<Farmer> getListOfFarmers(List listBox) {
+		
 		return createFarmerAndAddToList(listBox);
 	}
-
+	
+	public static List<Farmer> getListOfFarmers() {
+	    List<Farmer> listBox = new ArrayList<>();
+	    return createFarmerAndAddToList(listBox);
+	}
 	private static List<Farmer> createFarmerAndAddToList(List listBox) {
 		Farmer farmer1 = new Farmer();
 		farmer1.setBloodGroup(BloodGroup.O_NEGATIE);
 		farmer1.setId(1);
-		farmer1.setName("kathi venkataRamudu");
+		farmer1.setName("unknown person 1");
 		farmer1.setAge(53);
 		farmer1.setGender("male");
-		farmer1.setVillage("K.Sugumanchipalli");
+		farmer1.setVillage("village name1");
 		farmer1.setMobileNumber("9951323672");
 		farmer1.setLandArea("1.5Acres");
 		farmer1.setLandType("Fertile");
 		farmer1.setCropType("Kharif");
-
+		farmer1.setJoiningDate(LocalDateTime.of(2019, 5, 10, 0, 0));
 		farmer1.setBloodGroupPrice(5000);
 		farmer1.setAdmin(true);
 		farmer1.setYearlyIncome(50000);
@@ -41,15 +52,16 @@ public class MyDataBaseUtil {
 		Farmer farmer2 = new Farmer();
 		farmer2.setBloodGroup(BloodGroup.O_NEGATIE);
 		farmer2.setId(2);
-		farmer2.setName("kathi PeddaNarayana");
+		farmer2.setName("unknown person 2");
 		farmer2.setAge(80);
 		farmer2.setGender("male");
-		farmer2.setVillage("K.Sugumanchipalli");
+		farmer2.setVillage("village name2");
 		farmer2.setMobileNumber("9951323672");
 		farmer2.setLandArea("1.5Acres");
 		farmer2.setLandType("Fertile");
 		farmer2.setCropType("Kharif");
 		farmer2.setYearlyIncome(60000);
+		farmer2.setJoiningDate(LocalDateTime.of(2019, 5, 10, 0, 0)); 
 		farmer2.setBloodGroupPrice(6000);
 		farmer2.setAdmin(true);
 		farmer2.setLoanTaken(true);
@@ -60,17 +72,17 @@ public class MyDataBaseUtil {
 
 		Farmer farmer3 = new Farmer();
 		farmer3.setId(3);
-		farmer3.setName("kathi Obullamma");
+		farmer3.setName("unknown person 3");
 		farmer3.setAge(72);
 		farmer3.setGender("female");
-		farmer3.setVillage("K.Sugumanchipalli");
+		farmer3.setVillage("village name3");
 		farmer3.setMobileNumber("9951323672");
 		farmer3.setLandArea("1.5Acres");
 		farmer3.setLandType("Fertile");
 		farmer3.setCropType("Kharif");
 		farmer3.setYearlyIncome(70000);
 		farmer2.setBloodGroup(BloodGroup.O_NEGATIE);
-
+		farmer3.setJoiningDate(LocalDateTime.of(2019, 5, 10, 00, 00, 00));
 		farmer3.setBloodGroupPrice(4000);
 		farmer3.setAdmin(true);
 		farmer3.setLoanTaken(true);
@@ -83,15 +95,17 @@ public class MyDataBaseUtil {
 		farmer4.setBloodGroup(BloodGroup.O_NEGATIE);
 
 		farmer4.setId(4);
-		farmer4.setName("p.Obulesu");
+		farmer4.setName("unknown person 4");
 		farmer4.setAge(53);
 		farmer4.setGender("male");
-		farmer4.setVillage("K.Sugumanchipalli");
+		farmer4.setVillage("village name4");
 		farmer4.setMobileNumber("9951323672");
 		farmer4.setLandArea("1.5Acres");
 		farmer4.setLandType("Fertile");
 		farmer4.setCropType("Kharif");
 		farmer4.setYearlyIncome(80000);
+		farmer4.setJoiningDate(LocalDateTime.of(2024, 6, 28, 6, 55, 23));
+
 		farmer4.setBloodGroup(BloodGroup.O_POSSITIE);
 		farmer4.setBloodGroupPrice(600);
 		farmer4.setAdmin(true);
@@ -103,15 +117,16 @@ public class MyDataBaseUtil {
 
 		Farmer farmer5 = new Farmer();
 		farmer5.setId(5);
-		farmer5.setName("kathi VenkataRamudu");
+		farmer5.setName("unknown person 5");
 		farmer5.setAge(53);
 		farmer5.setGender("male");
-		farmer5.setVillage("K.Sugumanchipalli");
+		farmer5.setVillage("village name5");
 		farmer5.setMobileNumber("9951323672");
 		farmer5.setLandArea("1.5Acres");
 		farmer5.setLandType("Fertile");
 		farmer5.setCropType("Kharif");
 		farmer5.setBloodGroup(BloodGroup.O_POSSITIE);
+		farmer5.setJoiningDate(LocalDateTime.of(2024, 6, 28, 6, 55, 23));
 		farmer5.setBloodGroupPrice(100);
 		farmer5.setYearlyIncome(90000);
 		farmer5.setLoanTaken(true);
@@ -122,17 +137,17 @@ public class MyDataBaseUtil {
 
 		Farmer farmer6 = new Farmer();
 		farmer6.setId(6);
-		farmer6.setName("Great Grand father");
+		farmer6.setName("unknown person 6");
 		farmer6.setAge(53);
 		farmer6.setGender("male");
-		farmer6.setVillage("K.Sugumanchipalli");
+		farmer6.setVillage("village name6");
 		farmer6.setMobileNumber("9951323672");
 		farmer6.setLandArea("1.5Acres");
 		farmer6.setLandType("Fertile");
 		farmer6.setCropType("Kharif");
 		farmer6.setYearlyIncome(100000);
 		farmer6.setBloodGroup(BloodGroup.O_POSSITIE);
-
+		farmer6.setJoiningDate(LocalDateTime.of(2024, 6, 28, 6, 55, 23));
 		farmer6.setBloodGroupPrice(500);
 		farmer6.setAdmin(true);
 		farmer6.setLoanTaken(true);
@@ -172,7 +187,7 @@ public class MyDataBaseUtil {
 		} catch (Exception e) {
 			System.err.println("Error while creating set of farmers: " + e.getMessage());
 		}
-		return setOfFarmers; // Always returns empty set instead of null
+		return setOfFarmers; 
 	}
 
 	/**
@@ -192,7 +207,7 @@ public class MyDataBaseUtil {
 			map.put(222, "Rajesh");
 			map.put(221, "Rajesh");
 			map.put(null, "Rajesh");
-			map.put(null, "Rajesh 2nd null key"); // Overwrites previous null key
+			map.put(null, "Rajesh 2nd null key"); 
 			map.put(1234, null);
 			map.put(12345666, null);
 			map.put(14, "ramu");
@@ -200,7 +215,7 @@ public class MyDataBaseUtil {
 			map.put(15, "ram");
 			map.put(68, null);
 			map.put(33, "ramu");
-			map.put(14, "ag"); // Overwrites key 14 again
+			map.put(14, "ag"); 
 			map.put(46, "ah");
 			map.put(16, "ha");
 			map.put(31, "ykj");
@@ -235,9 +250,9 @@ public class MyDataBaseUtil {
 			map.put(14, "ramu");
 			map.put(27, "somu");
 			map.put(15, "ram");
-			map.put(68, null); // Note: This is still a null value
+			map.put(68, null); 
 			map.put(33, "ramu");
-			map.put(14, "ag"); // Overwrites key 14 with "ag"
+			map.put(14, "ag"); 
 			map.put(46, "ah");
 			map.put(16, "ha");
 			map.put(31, "ykj");
@@ -277,7 +292,7 @@ public class MyDataBaseUtil {
 			treeMap.put(27, "somu");
 			treeMap.put(15, "ram");
 			treeMap.put(33, "ramu");
-			treeMap.put(14, "ag"); // Overwrites previous value for key 14
+			treeMap.put(14, "ag"); 
 			treeMap.put(46, "ah");
 			treeMap.put(16, "ha");
 			treeMap.put(31, "ykj");
@@ -317,10 +332,10 @@ public class MyDataBaseUtil {
 			hashMap.put(27, "somu");
 			hashMap.put(15, "Bam");
 			hashMap.put(10, "Bulb");
-			hashMap.put(12345, null); // null value
-			hashMap.put(null, null); // one null key allowed
+			hashMap.put(12345, null); 
+			hashMap.put(null, null); 
 			hashMap.put(33, "ramu");
-			hashMap.put(14, "ag"); // overwrites previous value at key 14
+			hashMap.put(14, "ag"); 
 			hashMap.put(46, "ah");
 			hashMap.put(102, "akhila");
 			hashMap.put(16, "ha");
@@ -358,4 +373,5 @@ public class MyDataBaseUtil {
 		}
 	}
 
+	
 }
