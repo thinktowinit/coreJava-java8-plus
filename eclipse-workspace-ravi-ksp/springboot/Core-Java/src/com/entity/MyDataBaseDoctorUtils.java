@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,11 +12,8 @@ import java.util.TreeMap;
 
 public class MyDataBaseDoctorUtils {
 
-	public final static String filePathFromStudentTableFromDb = "C:\\Users\\ADMIN\\Documents\\java11\\folder-1\\write-data.txt";
-	public final static String filePatchFromTeacherTableFromDb = "C:\\Users\\ADMIN\\Documents\\java11\\folder-1\\write-data.txt";
-
+	
 	public static List<Doctor> getListOfDoctors(List listBox) {
-		// TODO Auto-generated method stub
 
 		return createDoctorAndAddToList(listBox);
 
@@ -51,7 +49,7 @@ public class MyDataBaseDoctorUtils {
 		doctor3.setBloodGroupPrice(2000);
 
 		Doctor doctor4 = new Doctor();
-		doctor4.setName("Abi"); // 7
+		doctor4.setName("Abi");
 		doctor4.setSalary(990);
 		doctor4.setBloodGroupPrice(990);
 		doctor4.setBloodGroup("oNegative");
@@ -72,13 +70,18 @@ public class MyDataBaseDoctorUtils {
 		doctor61.setGender("Male");
 		doctor61.setSalary(6000);
 		doctor61.setAdmin(true);
-
 		listBox.add(doctor3);
 		listBox.add(doctor2);
 		listBox.add(doctor1);
 		listBox.add(doctor4);
 		listBox.add(doctor5);
 		listBox.add(doctor61);
+
+		doctor1.setJoiningDate(LocalDate.of(2015, 6, 1));
+		doctor2.setJoiningDate(LocalDate.of(2018, 1, 15));
+		doctor3.setJoiningDate(LocalDate.of(2020, 9, 30));
+		doctor4.setJoiningDate(LocalDate.of(2019, 12, 10));
+		doctor5.setJoiningDate(LocalDate.of(2021, 3, 5));
 
 		Doctor doctor6 = new Doctor();
 		doctor6.setId(5);
@@ -88,21 +91,19 @@ public class MyDataBaseDoctorUtils {
 		doctor6.setAdmin(true);
 		doctor6.setAge(15);
 
-		listBox.add(doctor6);
-
 		return listBox;
 	}
 
 	public static Set<Doctor> getSetOfDoctor(List listBox) {
 		Set<Doctor> setOfEmployees = new HashSet<>();
-		List list = createDoctorAndAddToList(listBox); // 4
-		setOfEmployees.addAll(list); // 4
+		List list = createDoctorAndAddToList(listBox);
+		setOfEmployees.addAll(list);
 		return setOfEmployees;
 
 	}
 
 	public static Map<Integer, String> getSampleMapData() {
-		// TODO Auto-generated method stub
+
 		Map<Integer, String> map = new HashMap<>();
 
 		map.put(122, "Rajesh122");
@@ -132,7 +133,7 @@ public class MyDataBaseDoctorUtils {
 	}
 
 	public static Map<Integer, String> getSampleMapDataWithOutNull() {
-		// TODO Auto-generated method stub
+
 		Map<Integer, String> map = new HashMap<>();
 
 		map.put(122, "Rajesh122");
@@ -158,7 +159,7 @@ public class MyDataBaseDoctorUtils {
 	}
 
 	public static Map<Integer, String> getTreeMap() {
-		// TODO Auto-generated method stub
+
 		Map<Integer, String> treeMap = new TreeMap<>();
 
 		treeMap.put(122, "Rajesh122");
@@ -184,7 +185,7 @@ public class MyDataBaseDoctorUtils {
 	}
 
 	public static Map<Integer, String> getHashMap() {
-		// TODO Auto-generated method stub
+
 		Map<Integer, String> hashMap = new HashMap<>();
 
 		hashMap.put(122, "Rajesh122");
