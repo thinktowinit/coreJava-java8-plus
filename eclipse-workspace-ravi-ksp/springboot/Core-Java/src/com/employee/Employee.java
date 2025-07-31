@@ -12,7 +12,9 @@ public class Employee {
 	private String gender;
 	
 	
+
 	public LocalDate getJoiningDate() {
+
 		return joiningDate;
 	}
 	public void setJoiningDate(LocalDate joiningDate) {
@@ -23,8 +25,10 @@ public class Employee {
 	private int bloodGroupPrice;
 	private int age;
 	
+
 	//private LocalDate joiningDatee;
     private LocalDate joiningDate;
+
 	private List<String> frindNames;
 	//private LocalDate joiningDate;
 	

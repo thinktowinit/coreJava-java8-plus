@@ -36,7 +36,7 @@ public class MyDataBaseUtil {
 		employee1.setBloodGroup("oNegative");
 		employee1.setBloodGroupPrice(2000);
 		employee1.setAge(22);
-		employee1.setJoiningDatee(LocalDate.of(2020, 6, 15)); 
+		//employee1.setJoiningDatee(LocalDate.of(2020, 6, 15)); 
 		   employee1.setJoiningDate(LocalDateTime.of(2020, 6, 28, 6, 55, 23, 234_000_000));
 
 		Employee employee2 = new Employee();
@@ -46,7 +46,7 @@ public class MyDataBaseUtil {
 		employee2.setSalary(3300);
 		employee2.setAdmin(false);
 		employee2.setAge(23);
-		employee2.setJoiningDatee(LocalDate.of(2022, 6, 15)); 
+		//employee2.setJoiningDatee(LocalDate.of(2022, 6, 15)); 
 		   employee2.setJoiningDate(LocalDateTime.of(2022, 6, 28, 6, 55, 23, 234_000_000));
 
 		Employee employee3 = new Employee();
@@ -57,7 +57,7 @@ public class MyDataBaseUtil {
 		employee3.setAdmin(true);
 		employee3.setBloodGroup("oPossitie");
 		employee3.setBloodGroupPrice(2000);
-		employee3.setJoiningDatee(LocalDate.of(2021, 6, 15)); 
+		//employee3.setJoiningDatee(LocalDate.of(2021, 6, 15)); 
 		   employee3.setJoiningDate(LocalDateTime.of(2021, 6, 28, 6, 55, 23, 234_000_000));
 
 		Employee employee4 = new Employee();
@@ -69,7 +69,7 @@ public class MyDataBaseUtil {
 		employee4.setAge(25);
 		employee4.setId(4);
 		employee4.setAdmin(true);
-		employee4.setJoiningDatee(LocalDate.of(2023, 6, 16)); 
+		//employee4.setJoiningDatee(LocalDate.of(2023, 6, 16)); 
 		   employee4.setJoiningDate(LocalDateTime.of(2023, 6, 28, 6, 55, 23, 234_000_000));
 		
 		Employee employee5 = new Employee();
@@ -78,7 +78,7 @@ public class MyDataBaseUtil {
 		employee5.setGender("Male");
 		employee5.setSalary(6000);
 		employee5.setAdmin(true);
-		employee5.setJoiningDatee(LocalDate.of(2024, 7, 16)); 
+		//employee5.setJoiningDatee(LocalDate.of(2024, 7, 16)); 
 		   employee5.setJoiningDate(LocalDateTime.of(2024, 6, 28, 6, 55, 23, 234_000_000));
 		
 		Employee employee61 = new Employee();
@@ -87,7 +87,7 @@ public class MyDataBaseUtil {
 		employee61.setGender("Male");
 		employee61.setSalary(6000);
 		employee61.setAdmin(true);
-		employee61.setJoiningDatee(LocalDate.of(2023, 6, 15)); 
+		//employee61.setJoiningDatee(LocalDate.of(2023, 6, 15)); 
 		   employee61.setJoiningDate(LocalDateTime.of(2020, 6, 28, 6, 55, 23, 234_000_000));
 
 		listBox.add(employee3);
@@ -104,7 +104,7 @@ public class MyDataBaseUtil {
 		employee6.setSalary(6000);
 		employee6.setAdmin(true);
 		employee6.setAge(15);
-		employee6.setJoiningDatee(LocalDate.of(2023, 6, 15)); 
+		//employee6.setJoiningDatee(LocalDate.of(2023, 6, 15)); 
 		   employee6.setJoiningDate(LocalDateTime.of(2020, 6, 28, 6, 55, 23, 234_000_000));
 		
 		listBox.add(employee6);

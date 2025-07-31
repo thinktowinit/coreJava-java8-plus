@@ -30,6 +30,7 @@ import com.employee.Employee;
 
 public class MyStreamWithFilterLimitMap {
 
+	private static final String IT_WILL_NOT_DIVISIBLE_BY_3 = "it will not divisible by 3";
 	private static final String GET_EMP_IDS_WHOSE_BLODD_GROUP_IS_O_NEGATIVE_AND_BLOOD_PRICE_LESS_THAN60002 = "getEmpIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000===========";
 	private static final String SALARIES_AFTER_INCREASING_BY_10K = "Salaries After Increasing by 10K:";
 	private static final int _tenthousand = 10000;
@@ -143,13 +144,14 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
+			System.out.println(e.getMessage()+IT_WILL_NOT_DIVISIBLE_BY_3);
 		}
 	}
 	
 	
 	/**
 	 * getEmpIdWhoseSalaryGreaterThan3000method2
-	 * @return listOfEmpIds
+	 * @retu+rn listOfEmpIds
 	 */
 	public static List<Integer> getEmpIdWhoseSalaryGreaterThan3000method2(List<Employee> list) {
 	    List<Integer> listOfEmpIds = new ArrayList<>();
@@ -163,9 +165,10 @@ public class MyStreamWithFilterLimitMap {
 
 	        System.out.println("Successfully filtered " + listOfEmpIds.size() + " employees.");
 	    } catch (Exception e) {
-	        System.out.println("Error occurred while filtering employee list in getEmpIdWhoseSalaryGreaterThan3000method2.");
-	        System.out.println("Exception message: " + e.getMessage());
+	        
+	       
 	        e.printStackTrace(); 
+	        System.out.println("Exception message: " + e.getMessage());
 	    }
 	    return listOfEmpIds;
 	}
@@ -188,6 +191,7 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		    System.out.println("Exception message: " + e.getMessage());
 		}
 	}
 
@@ -199,6 +203,7 @@ public class MyStreamWithFilterLimitMap {
 		// TODO Auto-generated method stub
 		
 		try {
+		    System.out.println("getGenderWhoseNamesLenthGreaterThan6");
 			List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
 			List<String> listOfGenders = list.stream().filter(emp -> emp.getName().length() > CoreJavaConstants.NAME_LENGTH).map(emp -> emp.getGender())
 					.collect(Collectors.toList());
@@ -212,6 +217,9 @@ public class MyStreamWithFilterLimitMap {
 
 	}
 
+	/**
+	 * getEmpNamesWhoIsAdminAndHisSalaryGreaterThan6000
+	 */
 	private static void getEmpNamesWhoIsAdminAndHisSalaryGreaterThan6000() {
 		
 		try {
@@ -225,10 +233,14 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 
 	}
 
+	/**getEmpIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan60000
+	 * 
+	 */
 	private static void getEmpIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan60000() {
 		// TODO Auto-generated method stub
 		try {
@@ -243,11 +255,15 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 
 	}
 
 
+	/**
+	 *getEmpIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000 
+	 */
 	private static void getEmpIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000() {
 		// TODO Auto-generated method stub
 		try {
@@ -266,12 +282,16 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+System.out.println("Exception:"+e.getMessage());
 		}
 
 	}
 	
 	
 	
+	/**
+	 * getDifferentEmployeeNames
+	 */
 	private static void getDifferentEmployeeNames() {
 		// TODO Auto-generated method stub
 		try {
@@ -285,12 +305,16 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 
 	}
 	
-//	Get different employee salaries?
+
 	
+	/**
+	 * Get different employee salaries?
+	 */
 	private static void getDifferentEmployeesalaries () {
 		// TODO Auto-generated method stub
 		try {
@@ -304,6 +328,7 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 
 	}
@@ -324,6 +349,7 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 
 	}
@@ -332,6 +358,9 @@ public class MyStreamWithFilterLimitMap {
 	    return emp.getSalary() + _tenthousand;
 	}
 	
+	/**
+	 * getEmployeesalariesAfterIncreasingEverySalarybytenkk
+	 */
 	private static void getEmployeesalariesAfterIncreasingEverySalarybytenkk () {
 		  try {
 			List<Employee> employees = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
@@ -345,6 +374,7 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 
 
@@ -367,6 +397,7 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 	}
 	
@@ -375,6 +406,7 @@ public class MyStreamWithFilterLimitMap {
 	 */
 	private static void getEmpIdsAndSalary() {
 	    try {
+	    	System.out.println("getEmpIdsAndSalary");
 			List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
 
 			List<String> idSalaryList = list.stream()
@@ -386,6 +418,7 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 
 	}
@@ -413,10 +446,14 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 	}
 
 
+	/**
+	 * getEmpIdsAndSalarySortingValue
+	 */
 	private static void getEmpIdsAndSalarySortingValue() {
 	    // Get list of employees
 	    try {
@@ -428,10 +465,14 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 	}
 
 	
+	/**
+	 * getEmpIdsAndSalaryAndApplySortingBasedOnName
+	 */
 	private static void getEmpIdsAndSalaryAndApplySortingBasedOnName() {
 	    // Get list of employees
 	    try {
@@ -443,14 +484,30 @@ public class MyStreamWithFilterLimitMap {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 	}
 
+	/**
+	 * getEmployeeExperience
+	 */
 	private static void getEmployeeExperience() {
-	    // Get list of employees
 	    try {
-			List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
-LocalDate today = LocalDate.now(); // today's date
+	        List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
+	        LocalDate today = LocalDate.now(); // today's date
+
+	        list.forEach(emp -> {
+	            if (emp.getJoiningDate() != null) {
+	                LocalDate joiningDate = emp.getJoiningDate(); // Convert LocalDateTime to LocalDate
+	                Period experience = Period.between(joiningDate, today);
+	                System.out.println("Employee: " + emp.getName() +
+	                    " | Experience: " + experience.getYears() + " years, " +
+	                    experience.getMonths() + " months");
+	            } else {
+	                System.out.println("Employee: " + emp.getName() + " | Joining date not available.");
+	            }
+	        });
+
 
 list.forEach(emp -> {
 			Period experience = Period.between(emp.getJoiningDate(), today);
@@ -458,15 +515,21 @@ list.forEach(emp -> {
 			    " | Experience: " + experience.getYears() + " years, " +
 			    experience.getMonths() + " months");
    });
+
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 	
 	}
 	
 //	Get employee joining date and display in the form 
 	
+	/**
+	 * 
+	 */
 	private static void getEmployeeJoiningDate() {
 	    try {
 			List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
@@ -499,6 +562,7 @@ list.forEach(emp -> {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Exception:"+e.getMessage());
 		}
 	}
 
