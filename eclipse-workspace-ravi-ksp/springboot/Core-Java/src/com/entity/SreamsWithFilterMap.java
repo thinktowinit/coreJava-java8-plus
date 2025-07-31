@@ -1,7 +1,11 @@
 package com.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,7 +24,6 @@ public class SreamsWithFilterMap {
 	private static final int SALARY_DIVISOR = 3;
 	private static final int MAX_DOCTORS = 3;
 
-	
 	private static final int SALARY_THRESHOLD = 3000;
 	private static final String LOG_MESSAGE1 = "getDoctorIdWhoseSalaryGreaterThan3000";
 	private static final int NAME_LENGTH_THRESHOLD = 6;
@@ -33,7 +36,7 @@ public class SreamsWithFilterMap {
 	static final String LOG_MESSAGE5 = "getDoctorIdsWithNamesForONegativeBloodGroupAndPriceBelow6000";
 
 	private static final String LOG_UNIQUE_DOCTOR_NAMES = "Unique Doctor Names:";
-	
+
 	private static final java.util.function.Predicate<Doctor> VALID_NAME_CONDITION = doctor -> doctor != null
 			&& doctor.getName() != null;
 	private static final String LOG_NO_DOCTOR_DATA = "No doctor data available.";
@@ -65,10 +68,6 @@ public class SreamsWithFilterMap {
 	private static final String EXPERIENCE_SUFFIX = " years";
 	private static final String EXPERIENCE_LABEL = ", Experience: ";
 	private static final String DOCTOR_LIST_EMPTY = "Doctor list is empty or null.";
-	private static final String JOINING_HEADER = "Doctor: ";
-	private static final String JOINING_DATE_LABEL = "Joining Date: ";
-
-	private static final String NO_DOCTOR_DATA = "Doctor list is empty or null.";
 
 	public static void main(String[] args) {
 
@@ -92,7 +91,10 @@ public class SreamsWithFilterMap {
 		getDoctorNameAndSalarySortedByName(list);
 		printDoctorExperience(list);
 		printDoctorsJoiningDates(list);
-		Doctor.printJoiningDatesWithCustomFormat();
+		String result = SreamsWithFilterMap.formatAllJoiningDatesWithMonthName(list);
+		System.out.println(result);
+		String result1 = SreamsWithFilterMap.formatAllJoiningDatesStartsWithDay(list);
+		System.out.println(result1);
 
 	}
 
@@ -323,20 +325,16 @@ public class SreamsWithFilterMap {
 	 *
 	 * @param doctors List of Doctor objects
 	 */
+
 	private static void getTop3DoctorsWithExperienceGreaterThanOne(List<Doctor> doctors) {
 		try {
-			Optional<List<Doctor>> optionalDoctors = Optional.ofNullable(doctors);
-
-			if (optionalDoctors.isPresent() && !optionalDoctors.get().isEmpty()) {
+			Optional.ofNullable(doctors).filter(list -> !list.isEmpty()).ifPresentOrElse(list -> {
 				System.out.println(LOG_TOP3_DOCTORS);
-				optionalDoctors.get().stream().filter(d -> d != null && d.getExperience() > EXPERIENCE_THRESHOLD)
+				list.stream().filter(d -> d != null && calculateExperience(d.getJoiningDate()) > EXPERIENCE_THRESHOLD)
 						.limit(TOP_DOCTOR_LIMIT).forEach(d -> System.out.println("ID: " + d.getId() + ", Name: "
-								+ d.getName() + ", Experience: " + d.getExperience() + " years"));
+								+ d.getName() + ", Experience: " + calculateExperience(d.getJoiningDate()) + " years"));
 				System.out.println("==========================");
-			} else {
-				System.out.println(LOG_NO_DOCTOR_DATA1);
-			}
-
+			}, () -> System.out.println(LOG_NO_DOCTOR_DATA1));
 		} catch (Exception e) {
 			System.out.println("Exception in getTop3DoctorsWithExperienceGreaterThanOne(): ["
 					+ e.getClass().getSimpleName() + "] " + e.getMessage());
@@ -351,19 +349,13 @@ public class SreamsWithFilterMap {
 	 */
 	private static void getFirstDoctorNameWithSalaryGreaterThan1000(List<Doctor> doctors) {
 		try {
-			Optional<List<Doctor>> optionalDoctors = Optional.ofNullable(doctors);
-
-			if (optionalDoctors.isPresent() && !optionalDoctors.get().isEmpty()) {
-				optionalDoctors.get().stream()
-						.filter(d -> d != null && d.getSalary() > SALARY_THRESHOLD_FOR_FIRST_DOCTOR)
+			Optional.ofNullable(doctors).filter(list -> !list.isEmpty()).ifPresentOrElse(nonEmptyList -> {
+				nonEmptyList.stream().filter(d -> d != null && d.getSalary() > SALARY_THRESHOLD_FOR_FIRST_DOCTOR)
 						.map(Doctor::getName).findFirst()
 						.ifPresentOrElse(name -> System.out.println(LOG_FIRST_DOCTOR_SALARY_FOUND + name),
 								() -> System.out.println(LOG_NO_DOCTOR_SALARY_FOUND));
 				System.out.println("==========================");
-			} else {
-				System.out.println(LOG_DOCTOR_LIST_EMPTY);
-			}
-
+			}, () -> System.out.println(LOG_DOCTOR_LIST_EMPTY));
 		} catch (Exception e) {
 			System.out.println("Exception in getFirstDoctorNameWithSalaryGreaterThan1000(): ["
 					+ e.getClass().getSimpleName() + "] " + e.getMessage());
@@ -378,19 +370,14 @@ public class SreamsWithFilterMap {
 	 */
 	private static void getDoctorIdsAndSalaries(List<Doctor> doctors) {
 		try {
-			Optional<List<Doctor>> optionalDoctors = Optional.ofNullable(doctors);
+			Optional.ofNullable(doctors).filter(list -> !list.isEmpty()).ifPresentOrElse(nonEmptyList -> {
+				System.out.println(LOG_DOCTOR_ID_AND_SALARY);
 
-			if (!optionalDoctors.isPresent() || optionalDoctors.get().isEmpty()) {
-				System.out.println(LOG_DOCTOR_LIST_EMPTY);
-				return;
-			}
+				nonEmptyList.stream().filter(Objects::nonNull).forEach(doctor -> System.out
+						.println(DOCTOR_ID_PREFIX + doctor.getId() + DOCTOR_SALARY_PREFIX + doctor.getSalary()));
 
-			System.out.println(LOG_DOCTOR_ID_AND_SALARY);
-
-			optionalDoctors.get().stream().filter(Objects::nonNull).forEach(doctor -> System.out
-					.println(DOCTOR_ID_PREFIX + doctor.getId() + DOCTOR_SALARY_PREFIX + doctor.getSalary()));
-
-			System.out.println("======================");
+				System.out.println("======================");
+			}, () -> System.out.println(LOG_DOCTOR_LIST_EMPTY));
 		} catch (Exception e) {
 			System.out.println(
 					"Exception in getDoctorIdsAndSalaries(): [" + e.getClass().getSimpleName() + "] " + e.getMessage());
@@ -405,21 +392,18 @@ public class SreamsWithFilterMap {
 	 */
 	private static void getDoctorIdAndSalarySortedById(List<Doctor> doctors) {
 		try {
-			Optional<List<Doctor>> optionalDoctors = Optional.ofNullable(doctors);
+			Optional.ofNullable(doctors).filter(list -> !list.isEmpty()).ifPresentOrElse(nonEmptyList -> {
+				Map<Integer, Integer> doctorIdSalaryMap = nonEmptyList.stream().filter(Objects::nonNull)
+						.collect(Collectors.toMap(Doctor::getId, Doctor::getSalary, (oldValue, newValue) -> newValue,
+								TreeMap::new));
 
-			if (!optionalDoctors.isPresent() || optionalDoctors.get().isEmpty()) {
-				System.out.println(LOG_DOCTOR_LIST_EMPTY);
-				return;
-			}
+				System.out.println(LOG_DOCTOR_ID_SALARY_SORTED_BY_ID);
 
-			Map<Integer, Integer> doctorIdSalaryMap = optionalDoctors.get().stream().filter(Objects::nonNull).collect(
-					Collectors.toMap(Doctor::getId, Doctor::getSalary, (oldValue, newValue) -> newValue, TreeMap::new));
+				doctorIdSalaryMap.forEach(
+						(id, salary) -> System.out.println(DOCTOR_ID_PREFIX + id + DOCTOR_SALARY_PREFIX + salary));
 
-			System.out.println(LOG_DOCTOR_ID_SALARY_SORTED_BY_ID);
-			doctorIdSalaryMap
-					.forEach((id, salary) -> System.out.println(DOCTOR_ID_PREFIX + id + DOCTOR_SALARY_PREFIX + salary));
-
-			System.out.println("=========================");
+				System.out.println("=========================");
+			}, () -> System.out.println(LOG_DOCTOR_LIST_EMPTY));
 		} catch (Exception e) {
 			System.out.println("Exception in getDoctorIdAndSalarySortedById(): [" + e.getClass().getSimpleName() + "] "
 					+ e.getMessage());
@@ -434,23 +418,17 @@ public class SreamsWithFilterMap {
 	 */
 	private static void getDoctorIdAndSalarySortedBySalary(List<Doctor> doctors) {
 		try {
-			Optional<List<Doctor>> optionalDoctors = Optional.ofNullable(doctors);
+			Optional.ofNullable(doctors).filter(list -> !list.isEmpty()).ifPresentOrElse(nonEmptyList -> {
+				Map<Integer, Integer> doctorIdSalaryMap = nonEmptyList.stream().filter(Objects::nonNull)
+						.collect(Collectors.toMap(Doctor::getId, Doctor::getSalary, (oldValue, newValue) -> newValue));
 
-			if (!optionalDoctors.isPresent() || optionalDoctors.get().isEmpty()) {
-				System.out.println(LOG_DOCTOR_LIST_EMPTY);
-				return;
-			}
+				System.out.println(LOG_DOCTOR_ID_SALARY_SORTED_BY_SALARY);
 
-			Map<Integer, Integer> doctorIdSalaryMap = optionalDoctors.get().stream().filter(Objects::nonNull)
-					.collect(Collectors.toMap(Doctor::getId, Doctor::getSalary, (oldValue, newValue) -> newValue));
+				doctorIdSalaryMap.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(entry -> System.out
+						.println(DOCTOR_ID_PREFIX + entry.getKey() + DOCTOR_SALARY_PREFIX + entry.getValue()));
 
-			System.out.println(LOG_DOCTOR_ID_SALARY_SORTED_BY_SALARY);
-
-			doctorIdSalaryMap.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(entry -> System.out
-					.println(DOCTOR_ID_PREFIX + entry.getKey() + DOCTOR_SALARY_PREFIX + entry.getValue()));
-
-			System.out.println("================================");
-
+				System.out.println("================================");
+			}, () -> System.out.println(LOG_DOCTOR_LIST_EMPTY));
 		} catch (Exception e) {
 			System.out.println("Exception in getDoctorIdAndSalarySortedBySalary(): [" + e.getClass().getSimpleName()
 					+ "] " + e.getMessage());
@@ -465,24 +443,18 @@ public class SreamsWithFilterMap {
 	 */
 	private static void getDoctorNameAndSalarySortedByName(List<Doctor> doctors) {
 		try {
-			Optional<List<Doctor>> optionalDoctors = Optional.ofNullable(doctors);
+			Optional.ofNullable(doctors).filter(list -> !list.isEmpty()).ifPresentOrElse(nonEmptyList -> {
+				Map<String, Integer> doctorNameSalaryMap = nonEmptyList.stream().filter(Objects::nonNull)
+						.filter(d -> d.getName() != null)
+						.collect(Collectors.toMap(Doctor::getName, Doctor::getSalary, (oldVal, newVal) -> newVal));
 
-			if (!optionalDoctors.isPresent() || optionalDoctors.get().isEmpty()) {
-				System.out.println(LOG_DOCTOR_LIST_EMPTY);
-				return;
-			}
+				System.out.println(LOG_DOCTOR_NAME_SALARY_SORTED_BY_NAME);
 
-			Map<String, Integer> doctorNameSalaryMap = optionalDoctors.get().stream().filter(Objects::nonNull)
-					.filter(d -> d.getName() != null)
-					.collect(Collectors.toMap(Doctor::getName, Doctor::getSalary, (oldVal, newVal) -> newVal));
+				doctorNameSalaryMap.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> System.out
+						.println(DOCTOR_NAME_PREFIX + entry.getKey() + DOCTOR_SALARY_PREFIX + entry.getValue()));
 
-			System.out.println(LOG_DOCTOR_NAME_SALARY_SORTED_BY_NAME);
-
-			doctorNameSalaryMap.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> System.out
-					.println(DOCTOR_NAME_PREFIX + entry.getKey() + DOCTOR_SALARY_PREFIX + entry.getValue()));
-
-			System.out.println("====================");
-
+				System.out.println("====================");
+			}, () -> System.out.println(LOG_DOCTOR_LIST_EMPTY));
 		} catch (Exception e) {
 			System.out.println("Exception in getDoctorNameAndSalarySortedByName(): [" + e.getClass().getSimpleName()
 					+ "] " + e.getMessage());
@@ -497,28 +469,24 @@ public class SreamsWithFilterMap {
 	 */
 	public static void printDoctorExperience(List<Doctor> doctors) {
 		try {
-			Optional<List<Doctor>> optionalDoctors = Optional.ofNullable(doctors);
-
-			if (optionalDoctors.isEmpty() || optionalDoctors.get().isEmpty()) {
+			Optional.ofNullable(doctors).filter(list -> !list.isEmpty()).orElseGet(() -> {
 				System.out.println(DOCTOR_LIST_EMPTY);
-				return;
-			}
+				return List.of();
+			}).stream().filter(Objects::nonNull).map(Optional::ofNullable)
 
-			optionalDoctors.get().stream().filter(Objects::nonNull).filter(d -> d.getJoiningDate() != null)
+					.filter(optDoctor -> optDoctor.map(Doctor::getJoiningDate).isPresent()).map(Optional::get)
 					.forEach(d -> {
 						LocalDate joiningDate = d.getJoiningDate();
-						LocalDate today = LocalDate.now();
-						int yearsOfExperience = Period.between(joiningDate, today).getYears();
-
+						int yearsOfExperience = Period.between(joiningDate, LocalDate.now()).getYears();
 						System.out.println(EXPERIENCE_LOG_PREFIX + d.getName() + EXPERIENCE_LABEL + yearsOfExperience
 								+ EXPERIENCE_SUFFIX);
 					});
+
 			System.out.println("================================");
 
 		} catch (Exception e) {
 			System.out.println(
 					"Exception in printDoctorExperience(): [" + e.getClass().getSimpleName() + "] " + e.getMessage());
-			e.printStackTrace();
 		}
 	}
 
@@ -527,25 +495,77 @@ public class SreamsWithFilterMap {
 	 *
 	 * @param doctors list of Doctor objects
 	 */
+	public static int calculateExperience(LocalDate joiningDate) {
+		return Optional.ofNullable(joiningDate).map(date -> (int) ChronoUnit.YEARS.between(date, LocalDate.now()))
+				.orElse(0);
+	}
+
 	public static void printDoctorsJoiningDates(List<Doctor> doctors) {
 		try {
-			Optional<List<Doctor>> optionalDoctors = Optional.ofNullable(doctors);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+			LocalTime fixedTime = LocalTime.of(6, 55, 0, 234_000_000);
 
-			if (optionalDoctors.isEmpty() || optionalDoctors.get().isEmpty()) {
-				System.out.println(NO_DOCTOR_DATA);
-				return;
-			}
+			Optional.ofNullable(doctors).filter(list -> !list.isEmpty())
+					.ifPresentOrElse(list -> list.stream().filter(Objects::nonNull).forEach(doctor -> {
+						System.out.println("Doctor: " + doctor.getName());
 
-			optionalDoctors.get().stream().filter(Objects::nonNull).forEach(doctor -> {
-				System.out.println(JOINING_HEADER + doctor.getName());
-				System.out.println(JOINING_DATE_LABEL + doctor.getFormattedJoiningDateTime());
-			});
-			System.out.println("==============");
+						String formattedDate = Optional.ofNullable(doctor.getJoiningDate())
+								.map(date -> LocalDateTime.of(date, fixedTime).format(formatter))
+								.orElse("Joining date not available");
 
+						System.out.println("Joining Date: " + formattedDate);
+						System.out.println("---------------");
+					}), () -> System.out.println("No doctor data available."));
 		} catch (Exception e) {
-			System.out.println("Exception in printDoctorsJoiningDates(): [" + e.getClass().getSimpleName() + "] "
-					+ e.getMessage());
+			System.out.println("Exception in printDoctorsJoiningDates:" + e.getMessage());
+
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Prints each doctor's formatted joining date with month name.
+	 *
+	 * @param doctors list of Doctor objects
+	 */
+
+	public static String formatAllJoiningDatesWithMonthName(List<Doctor> list) {
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMMM-dd HH:mm:ss.SSS");
+			LocalTime fixedTime = LocalTime.of(6, 55, 0, 234_000_000);
+
+			return Optional.ofNullable(list).orElse(List.of()).stream().filter(Objects::nonNull)
+					.map(doctor -> Optional.ofNullable(doctor.getJoiningDate())
+							.map(date -> LocalDateTime.of(date, fixedTime).format(formatter))
+							.orElse("Joining date not available"))
+					.collect(Collectors.joining("\n"));
+		} catch (Exception e) {
+			System.out.println("Exception at formatAllJoiningDatesWithMonthName: " + e.getMessage());
+			e.printStackTrace();
+			return "Error formatting joining dates";
+		}
+	}
+
+	/**
+	 * Prints each doctor's formatted joining date starts with day.
+	 *
+	 * @param doctors list of Doctor objects
+	 */
+
+	public static String formatAllJoiningDatesStartsWithDay(List<Doctor> list) {
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss.SSS");
+			LocalTime fixedTime = LocalTime.of(6, 55, 0, 234_000_000);
+
+			return Optional.ofNullable(list).orElse(List.of()).stream().filter(Objects::nonNull)
+					.map(doctor -> Optional.ofNullable(doctor.getJoiningDate())
+							.map(date -> LocalDateTime.of(date, fixedTime).format(formatter))
+							.orElse("Joining date not available"))
+					.collect(Collectors.joining("\n"));
+		} catch (Exception e) {
+			System.out.println("Exception at formatAllJoiningDatesStartsWithDay: " + e.getMessage());
+			e.printStackTrace();
+			return "Error formatting joining dates";
 		}
 	}
 

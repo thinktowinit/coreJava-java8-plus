@@ -12,9 +12,7 @@ import java.util.TreeMap;
 
 public class MyDataBaseDoctorUtils {
 
-	public final static String filePathFromStudentTableFromDb = "C:\\Users\\ADMIN\\Documents\\java11\\folder-1\\write-data.txt";
-	public final static String filePatchFromTeacherTableFromDb = "C:\\Users\\ADMIN\\Documents\\java11\\folder-1\\write-data.txt";
-
+	
 	public static List<Doctor> getListOfDoctors(List listBox) {
 
 		return createDoctorAndAddToList(listBox);
@@ -78,13 +76,7 @@ public class MyDataBaseDoctorUtils {
 		listBox.add(doctor4);
 		listBox.add(doctor5);
 		listBox.add(doctor61);
-		doctor1.setExperience(2);
-		doctor2.setExperience(1);
-		doctor3.setExperience(5);
-		doctor4.setExperience(3);
-		doctor5.setExperience(0);
 
-		doctor61.setExperience(1);
 		doctor1.setJoiningDate(LocalDate.of(2015, 6, 1));
 		doctor2.setJoiningDate(LocalDate.of(2018, 1, 15));
 		doctor3.setJoiningDate(LocalDate.of(2020, 9, 30));
@@ -98,7 +90,6 @@ public class MyDataBaseDoctorUtils {
 		doctor6.setSalary(6000);
 		doctor6.setAdmin(true);
 		doctor6.setAge(15);
-
 
 		return listBox;
 	}

@@ -1,11 +1,7 @@
 package com.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 public class Doctor {
 
@@ -17,8 +13,12 @@ public class Doctor {
 	private String bloodGroup;
 	private int bloodGroupPrice;
 	private int age;
-	private int experience;
+
 	private LocalDate joiningDate;
+
+	public void setJoiningDate(LocalDate joiningDate) {
+		this.joiningDate = joiningDate;
+	}
 
 	private List<String> friendNames;
 
@@ -94,47 +94,8 @@ public class Doctor {
 		this.bloodGroupPrice = bloodGroupPrice;
 	}
 
-	public int getExperience() {
-		return experience;
-	}
-
-	public void setExperience(int experience) {
-		this.experience = experience;
-	}
-
 	public LocalDate getJoiningDate() {
 		return joiningDate;
 	}
 
-	public void setJoiningDate(LocalDate joiningDate) {
-		this.joiningDate = joiningDate;
-	}
-
-	public String getFormattedJoiningDateTime() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMMM-dd HH:mm:ss.SSS");
-		Optional<LocalDate> optionalJoiningDate = Optional.ofNullable(this.joiningDate);
-		LocalTime fixedTime = LocalTime.of(6, 55, 23, 234_000_000);
-		return optionalJoiningDate.map(date -> LocalDateTime.of(date, fixedTime).format(formatter))
-				.orElse("Joining date not available");
-	}
-
-	public static void printJoiningDatesWithCustomFormat() {
-		Doctor doctor = new Doctor();
-		doctor.setJoiningDate(LocalDate.of(2024, 6, 28));
-
-		String firstFormattedDate = doctor.getFormattedJoiningDateTime();
-		System.out.println(" Get employee joining date and display in the form of " + firstFormattedDate);
-
-		String secondFormattedDate = doctor.getFormattedJoiningDateTimeFixed();
-		System.out.println(" Get employee joining date and display in the form of " + secondFormattedDate);
-	}
-
-	public String getFormattedJoiningDateTimeFixed() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss.SSS");
-		Optional<LocalDate> optionalJoiningDate = Optional.ofNullable(this.joiningDate);
-		LocalTime fixedTime = LocalTime.of(6, 55, 23, 234_000_000);
-
-		return optionalJoiningDate.map(date -> LocalDateTime.of(date, fixedTime).format(formatter))
-				.orElse("Joining date not available");
-	}
 }

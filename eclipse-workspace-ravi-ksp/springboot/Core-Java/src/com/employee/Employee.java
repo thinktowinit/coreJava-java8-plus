@@ -1,5 +1,6 @@
 package com.employee;
 
+import java.time.LocalDate;
 import java.util.List;
 
 //@getterssetters
@@ -14,6 +15,16 @@ public class Employee {
 	private int bloodGroupPrice;
 	private int age;
 	private List<String> frindNames;
+	private LocalDate joiningDate;
+	
+	
+	
+	public LocalDate getJoiningDate() {
+		return joiningDate;
+	}
+	public void setJoiningDate(LocalDate joiningDate) {
+		this.joiningDate = joiningDate;
+	}
 	public int getId() {
 		return id;
 	}
