@@ -1,16 +1,27 @@
 package com.java8.stream;
 
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 import java.util.TreeMap;
+
+
 import java.util.stream.Collectors;
 
 import com.collections.arraylistcode.MyDataBaseUtil;
@@ -79,7 +90,46 @@ public class MyStreamWithFilterLimitMap {
 		getEmpIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000();
 		
 		getEmpIdWhoseSalaryGreaterThan3000method2(list);
+
+		getFormattedJoiningDateTime(list);
+		
+
 	}
+	
+	
+	private static List<String> getFormattedJoiningDateTime(List<Employee> empList) {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMMM-dd HH:mm:ss.SSS");
+	    LocalTime fixedTime = LocalTime.of(6, 55, 23, 234_000_000);
+
+//	    return empList.stream()
+//	            .map(emp -> {
+//	                LocalDate joiningDate = emp.getJoiningDate(); // Assuming getJoiningDate() returns a LocalDate
+//	                //LocalDateTime joiningDateTime = joiningDate.atStartOfDay(); 00:00:00
+//	                if (joiningDate != null) {
+//	                    LocalDateTime dateTime = LocalDateTime.of(joiningDate, fixedTime);
+//	                    return dateTime.format(formatter);
+//	                } else {
+//	                    return "Joining date not available";
+//	                }
+//	            })
+//	            .collect(Collectors.toList());
+	    
+//	    return empList.stream()
+//	            .map(emp -> Optional.ofNullable(emp.getJoiningDate())
+//	                .map(date -> LocalDateTime.of(date, fixedTime).format(formatter))
+//	                .orElse("Joining date not available"))
+//	            .collect(Collectors.toList());
+	    
+	    
+	    return Optional.ofNullable(empList)
+	            .orElseGet(Collections::emptyList) // Handle null empList
+	            .stream()
+	            .map(emp -> Optional.ofNullable(emp.getJoiningDate())
+	                .map(date -> LocalDateTime.of(date, fixedTime).format(formatter))
+	                .orElse("Joining date not available"))
+	            .collect(Collectors.toList());
+	}
+
 
 	/**
 	 * getListOfNamesWhoseSalaryDeidedBy3AndGetMax3Employees
@@ -403,7 +453,7 @@ public class MyStreamWithFilterLimitMap {
 LocalDate today = LocalDate.now(); // today's date
 
 list.forEach(emp -> {
-			Period experience = Period.between(emp.getJoiningDatee(), today);
+			Period experience = Period.between(emp.getJoiningDate(), today);
 			System.out.println("Employee: " + emp.getName() + 
 			    " | Experience: " + experience.getYears() + " years, " +
 			    experience.getMonths() + " months");
@@ -437,9 +487,9 @@ list.forEach(emp -> {
 			        return;
 			    }
 
-			    LocalDateTime joiningDate = emp.getJoiningDate();
+			    LocalDate joiningDate = emp.getJoiningDate();
 			    String formattedJoiningDate = joiningDate.format(formatter);
-			    Period experience = Period.between(joiningDate.toLocalDate(), today);
+			    Period experience = Period.between(joiningDate, today);
 
 			    System.out.println("Employee: " + emp.getName() +
 			        " | Joining Date: " + formattedJoiningDate +
@@ -476,9 +526,9 @@ list.forEach(emp -> {
 			        return;
 			    }
 
-			    LocalDateTime joiningDate = emp.getJoiningDate();
+			    LocalDate joiningDate = emp.getJoiningDate();
 			    String formattedJoiningDate = joiningDate.format(formatter);
-			    Period experience = Period.between(joiningDate.toLocalDate(), today);
+			    Period experience = Period.between(joiningDate, today);
 
 			    System.out.println("Employee: " + emp.getName() +
 			        " | Joining Date: " + formattedJoiningDate +
@@ -529,18 +579,18 @@ list.forEach(emp -> {
 	    // Filter employees with experience > 1 year and limit to max 3 employees
 	    list.stream()
 	        .filter(emp -> {
-	            if (emp.getJoiningDatee() == null) {
+	            if (emp.getJoiningDate() == null) {
 	                System.out.println("Joining date missing for employee: " + emp.getName());
 	                return false;
 	            }
-	            Period experience = Period.between(emp.getJoiningDate().toLocalDate(), today);
+	            Period experience = Period.between(emp.getJoiningDate(), today);
 	            return experience.getYears() > 1;
 	        })
 	        .limit(3)
 	        .forEach(emp -> {
-	            LocalDateTime joiningDate = emp.getJoiningDate();
+	            LocalDate joiningDate = emp.getJoiningDate();
 	            String formattedJoiningDate = joiningDate.format(formatter);
-	            Period experience = Period.between(joiningDate.toLocalDate(), today);
+	            Period experience = Period.between(joiningDate, today);
 
 	            System.out.println("Employee: " + emp.getName() +
 	                " | Joining Date: " + formattedJoiningDate +

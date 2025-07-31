@@ -57,7 +57,7 @@ public class MyOptional {
 				}).collect(Collectors.toList());
 		
 		
-		//in short form
+		//in short form of above code
 		List<String> listOfEmpNamesGetDefaultNameIfNameIsNUll2 = Optional.ofNullable(listOfEmp)
 				.orElse(Collections.emptyList()).stream().map(emp -> {
 					return Optional.ofNullable(emp.getName()).orElse(defaultName);

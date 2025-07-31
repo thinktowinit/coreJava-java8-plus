@@ -1,5 +1,6 @@
 package com.java8.stream.functionalInterface;
 
+//before  java8
 public class MainUseOfFunctonalInterface {
 
 	public static void main(String[] args) {
