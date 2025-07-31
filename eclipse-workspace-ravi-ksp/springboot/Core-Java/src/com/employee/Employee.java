@@ -10,21 +10,31 @@ public class Employee {
 	private String name;
 	private int salary;
 	private String gender;
-	private boolean isAdmin;
-	private String bloodGroup;
-	private int bloodGroupPrice;
-	private int age;
-	private List<String> frindNames;
-	private LocalDate joiningDate;
 	
 	
-	
+
 	public LocalDate getJoiningDate() {
+
 		return joiningDate;
 	}
 	public void setJoiningDate(LocalDate joiningDate) {
 		this.joiningDate = joiningDate;
 	}
+	private boolean isAdmin;
+	private String bloodGroup;
+	private int bloodGroupPrice;
+	private int age;
+	
+
+	//private LocalDate joiningDatee;
+    private LocalDate joiningDate;
+
+	private List<String> frindNames;
+	//private LocalDate joiningDate;
+	
+	
+	
+	
 	public int getId() {
 		return id;
 	}

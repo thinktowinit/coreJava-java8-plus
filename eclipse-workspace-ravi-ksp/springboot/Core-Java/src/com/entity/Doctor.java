@@ -1,6 +1,6 @@
 package com.entity;
 
-
+import java.time.LocalDate;
 import java.util.List;
 
 public class Doctor {
@@ -13,14 +13,21 @@ public class Doctor {
 	private String bloodGroup;
 	private int bloodGroupPrice;
 	private int age;
-	private List<String> frindNames;
 
-	public List<String> getFrindNames() {
-		return frindNames;
+	private LocalDate joiningDate;
+
+	public void setJoiningDate(LocalDate joiningDate) {
+		this.joiningDate = joiningDate;
 	}
 
-	public void setFrindNames(List<String> frindNames) {
-		this.frindNames = frindNames;
+	private List<String> friendNames;
+
+	public List<String> getFriendNames() {
+		return friendNames;
+	}
+
+	public void setFriendNames(List<String> friendNames) {
+		this.friendNames = friendNames;
 	}
 
 	public Integer getAge() {
@@ -87,5 +94,8 @@ public class Doctor {
 		this.bloodGroupPrice = bloodGroupPrice;
 	}
 
-}
+	public LocalDate getJoiningDate() {
+		return joiningDate;
+	}
 
+}
