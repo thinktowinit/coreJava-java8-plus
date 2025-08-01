@@ -7,5 +7,7 @@ public class Java11IsBlank {
 
 		String str2 = "GeeksForGeeks";
 		System.out.println(str2.isBlank());
+		
+		
 	}
 }
