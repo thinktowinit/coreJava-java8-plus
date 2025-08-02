@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.enums.BloodGroup;
@@ -14,6 +15,13 @@ public class Customer {
     private int bloodGroupPrice; 
     private int age;
     private List<String> familyMembers;
+    private LocalDateTime joiningDateTime;
+	public LocalDateTime getJoiningDateTime() {
+		return joiningDateTime;
+	}
+	public void setJoiningDateTime(LocalDateTime joiningDateTime) {
+		this.joiningDateTime = joiningDateTime;
+	}
 	public int getCustomerId() {
 		return customerId;
 	}
@@ -68,8 +76,6 @@ public class Customer {
 	public void setFamilyMembers(List<String> familyMembers) {
 		this.familyMembers = familyMembers;
 	}
-	
-	 
-    
+	   
 	
 }

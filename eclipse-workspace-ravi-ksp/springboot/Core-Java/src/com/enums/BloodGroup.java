@@ -3,7 +3,8 @@ package com.enums;
 public enum BloodGroup {
 	
 	O_NEGATIE("o negatie", 10000), 
-	O_POSSITIE("o possitie", 1000);   
+	O_POSSITIE("o possitie", 1000), 
+	UNKNOWN("AB positive", 15000);   
 	  
 	public int price;  
 	public String bloodGroup;  
