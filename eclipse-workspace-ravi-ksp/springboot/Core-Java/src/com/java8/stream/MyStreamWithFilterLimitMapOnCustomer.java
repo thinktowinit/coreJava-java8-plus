@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -68,7 +69,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getGenderWhoseNamesLenthGreaterThan6() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			List<String> listOfGenders = list.stream()
+			List<String> listOfGenders = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.filter(customer -> Optional.ofNullable(customer.getName()).map(name -> name.length() > NAME_LENGTH)
 							.orElse(false))
 					.map(customer -> customer.getName() + " - " + customer.getGender()).collect(Collectors.toList());
@@ -88,7 +89,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getCustomerIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			Map<Integer, String> listOfCustomerIds = list.stream()
+			Map<Integer, String> listOfCustomerIds = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.filter(cus -> Optional.ofNullable(cus.getBloodGroup()).map(bg -> bg == BloodGroup.O_NEGATIE)
 							.orElse(false) && Optional.ofNullable(cus.getBloodGroupPrice()).orElse(NULL) < SIX_THOUSAND)
 					.collect(Collectors.toMap(cus -> Optional.ofNullable(cus.getCustomerId()).orElse(OTHER),
@@ -111,7 +112,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getCustomerIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			List<Integer> listOfCustomerIds = list.stream().filter(
+			List<Integer> listOfCustomerIds = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream().filter(
 					cus -> Optional.ofNullable(cus.getBloodGroup()).orElse(BloodGroup.UNKNOWN) == BloodGroup.O_NEGATIE
 							&& Optional.ofNullable(cus.getBloodGroupPrice()).orElse(NULL) < SIX_THOUSAND)
 					.map(cus -> Optional.ofNullable(cus.getCustomerId()).orElse(OTHER)).collect(Collectors.toList());
@@ -131,7 +132,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getCustomerNamesWhoIsAdminAndHisSalaryGreaterThan6000() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			List<String> listOfNames = list.stream()
+			List<String> listOfNames = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.filter(customer -> Optional.ofNullable(customer.getSalary()).orElse(NULL) > SIX_THOUSAND
 							&& Optional.ofNullable(customer.isAdmin()).orElse(false))
 					.map(customer -> Optional.ofNullable(customer.getName()).orElse(UNKNOWN))
@@ -153,7 +154,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
 			System.out.println("getCustomerIdWhoseSalaryGreaterThan3000==============");
-			list.stream().filter(customer -> Optional.ofNullable(customer.getSalary()).orElse(NULL) > THREE_THOUSAND)
+			Optional.ofNullable(list) .orElse(Collections.emptyList()).stream().filter(customer -> Optional.ofNullable(customer.getSalary()).orElse(NULL) > THREE_THOUSAND)
 					.map(customer -> Optional.ofNullable(customer.getCustomerId()).orElse(OTHER))
 					.collect(Collectors.toList()).forEach(System.out::println);
 		} catch (Exception e) {
@@ -169,7 +170,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getDifferentCustomerNames() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			List<String> listOfCustomers = list.stream()
+			List<String> listOfCustomers = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.map(customer -> Optional.ofNullable(customer.getName()).orElse(UNKNOWN)).distinct()
 					.collect(Collectors.toList());
 			System.out.println("getDifferentCustomerNames============");
@@ -186,7 +187,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getDifferentCustomerSalaries() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			List<Integer> listOfSalaries = list.stream()
+			List<Integer> listOfSalaries = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.map(customer -> Optional.ofNullable(customer.getSalary()).orElse(NULL)).distinct()
 					.collect(Collectors.toList());
 			System.out.println("getDifferentCustomerSalaries==========");
@@ -204,7 +205,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getCustomerSalariesAfterIncreasingEverySalaryBy10kUsingMethodReference() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			List<Integer> listOfSalaries = list.stream()
+			List<Integer> listOfSalaries = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.map(customer -> Optional.ofNullable(customer.getSalary()).orElse(NULL) + INCREMENT_SALARY_BY_10000)
 					.collect(Collectors.toList());
 			System.out.println("getCustomerSalariesAfterIncreasingEverySalaryBy10kUsingMethodReference=========");
@@ -223,7 +224,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getCustomersWhoseExperienceIsGreaterthan1Year() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			List<String> listOfCustomers = list.stream().filter(customer -> getExperience(customer) > 1).limit(3)
+			List<String> listOfCustomers = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream().filter(customer -> getExperience(customer) > 1).limit(3)
 					.map(customer -> Optional.ofNullable(customer.getName()).orElse(UNKNOWN) + " having experience - "
 							+ getExperience(customer))
 					.collect(Collectors.toList());
@@ -243,7 +244,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static int getExperience(Customer c) {
 		int exp = 0;
 		try {
-			LocalDateTime joiningDate = Optional.ofNullable(c.getJoiningDate()).orElse(LocalDateTime.now());
+			LocalDateTime joiningDate = Optional.ofNullable(c.getJoiningDateTime()).orElse(LocalDateTime.now());
 			LocalDateTime today = LocalDateTime.now();
 			exp = (int) ChronoUnit.YEARS.between(joiningDate, today);
 			return exp;
@@ -261,7 +262,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getFirstCustomerNameWhoseSalaryGreaterthan1000() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			Optional<String> firstCustomerName = list.stream()
+			Optional<String> firstCustomerName = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.filter(customer -> Optional.ofNullable(customer.getSalary()).orElse(NULL) > THOUSAND)
 					.map(customer -> Optional.ofNullable(customer.getName()).orElse(UNKNOWN)).findFirst();
 			System.out.println("getFirstCustomerNameWhoseSalaryGreaterthan1000=============");
@@ -278,7 +279,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getCustomerIdAndthierSalary() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			Map<Integer, Integer> map = list.stream()
+			Map<Integer, Integer> map = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.collect(Collectors.toMap(cus -> Optional.ofNullable(cus.getCustomerId()).orElse(NULL),
 							cus -> Optional.ofNullable(cus.getSalary()).orElse(NULL)));
 			System.out.println("getCustomerIdAndthierSalary=============");
@@ -295,7 +296,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getCustomerIdAndSalaryAndApplySortingBasedOnKey() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			Map<Integer, Integer> customerIdAndSalary = list.stream()
+			Map<Integer, Integer> customerIdAndSalary = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.collect(Collectors.toMap(cus -> Optional.ofNullable(cus.getCustomerId()).orElse(0),
 							cus -> Optional.ofNullable(cus.getSalary()).orElse(0)));
 			System.out.println("getCustomerIdAndSalaryAndApplySortingBasedOnKey====");
@@ -314,7 +315,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 	private static void getCustomerIdAndSalaryAndApplySortingBasedOnValue() {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
-			Map<Integer, Integer> customerIdAndSalary = list.stream()
+			Map<Integer, Integer> customerIdAndSalary = Optional.ofNullable(list) .orElse(Collections.emptyList()).stream()
 					.collect(Collectors.toMap(cus -> Optional.ofNullable(cus.getCustomerId()).orElse(NULL),
 							cus -> Optional.ofNullable(cus.getSalary()).orElse(NULL)));
 			System.out.println("getCustomerIdAndSalaryAndApplySortingBasedOnValue======");
@@ -335,7 +336,7 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
 			Comparator<Customer> sortByName = Comparator
 					.comparing(customer -> Optional.ofNullable(customer.getName()).orElse(EMPTY));
-			list.sort(sortByName);
+			Optional.ofNullable(list) .orElse(Collections.emptyList()).sort(sortByName);
 			System.out.println("getCustomerIdAndNameAndApplySortingBasedOnName======");
 			list.forEach(cus -> {
 				String name = Optional.ofNullable(cus.getName()).orElse("Unknown Name");
@@ -356,8 +357,8 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 		try {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
 			System.out.println("Calculate employee experience based on joining date and today’s date=============");
-			list.forEach(customer -> {
-				Optional<LocalDateTime> optionalJoiningDate = Optional.ofNullable(customer.getJoiningDate());
+			Optional.ofNullable(list) .orElse(Collections.emptyList()).forEach(customer -> {
+				Optional<LocalDateTime> optionalJoiningDate = Optional.ofNullable(customer.getJoiningDateTime());
 				String exp = optionalJoiningDate.map(joiningDate -> {
 					LocalDateTime today = LocalDateTime.now();
 					long years = ChronoUnit.YEARS.between(joiningDate, today);
@@ -385,10 +386,10 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 			System.out.println("Get customer joining date and display in the form of 2024-06-28 06:55:234 ===============");
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ssS");
 			System.out.println();
-			list.forEach(customer -> {
-				Optional<LocalDateTime> optionalDate = Optional.ofNullable(customer.getJoiningDate());
+			Optional.ofNullable(list) .orElse(Collections.emptyList()).forEach(customer -> {
+				Optional<LocalDateTime> optionalDate = Optional.ofNullable(customer.getJoiningDateTime());
 				String formattedDate = optionalDate.map(date -> date.format(dtf)).orElse("joining date not available");
-				System.out.println(customer.getJoiningDate() + " => " + formattedDate);
+				System.out.println(customer.getJoiningDateTime() + " => " + formattedDate);
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -406,10 +407,10 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
 			System.out.println("Get customer joining date and display in the form of 2024-June-28 06:55:234 ==============");
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MMMM-dd HH:mm:ssS");
-			list.forEach(customer -> {
-				Optional<LocalDateTime> optionalDate = Optional.ofNullable(customer.getJoiningDate());
+			Optional.ofNullable(list) .orElse(Collections.emptyList()).forEach(customer -> {
+				Optional<LocalDateTime> optionalDate = Optional.ofNullable(customer.getJoiningDateTime());
 				String formattedDate = optionalDate.map(date -> date.format(dtf)).orElse("joining date not available");
-				System.out.println(customer.getJoiningDate() + " => " + formattedDate);
+				System.out.println(customer.getJoiningDateTime() + " => " + formattedDate);
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -427,10 +428,10 @@ public class MyStreamWithFilterLimitMapOnCustomer {
 			List<Customer> list = MyDataBaseCustomerUtil.getListOfCustomers(new ArrayList<>());
 			System.out.println(" Get customer joining date and display in the form of 28-June-2024 06:55:234 =========");
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MMMM-YYYY HH:mm:ssS");
-			list.forEach(customer -> {
-				Optional<LocalDateTime> optionalDate = Optional.ofNullable(customer.getJoiningDate());
+			Optional.ofNullable(list) .orElse(Collections.emptyList()).forEach(customer -> {
+				Optional<LocalDateTime> optionalDate = Optional.ofNullable(customer.getJoiningDateTime());
 				String formattedDate = optionalDate.map(date -> date.format(dtf)).orElse("joining date not available");
-				System.out.println(customer.getJoiningDate() + " => " + formattedDate);
+				System.out.println(customer.getJoiningDateTime() + " => " + formattedDate);
 			});
 		} catch (Exception e) {
 			e.printStackTrace();

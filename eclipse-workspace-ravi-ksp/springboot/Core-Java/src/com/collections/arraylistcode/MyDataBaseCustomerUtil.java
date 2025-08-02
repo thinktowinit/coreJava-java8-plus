@@ -42,7 +42,7 @@ public class MyDataBaseCustomerUtil {
 			c1.setBloodGroup(BloodGroup.O_NEGATIE);
 			c1.setBloodGroupPrice(3000);
 			c1.setAge(22);
-			c1.setJoiningDate(LocalDateTime.of(2025, 1, 18, 9, 8, 56));
+			c1.setJoiningDateTime(LocalDateTime.of(2025, 1, 18, 9, 8, 56));
 			Customer c2=new Customer();
 			c2.setName("Darshan");
 			c2.setCustomerId(2);
@@ -52,7 +52,7 @@ public class MyDataBaseCustomerUtil {
 			c2.setBloodGroup(BloodGroup.O_POSSITIE);
 			c2.setBloodGroupPrice(2000);
 			c2.setAge(20);
-			c2.setJoiningDate(LocalDateTime.of(2020, 2, 15, 13, 05, 45));
+			c2.setJoiningDateTime(LocalDateTime.of(2020, 2, 15, 13, 05, 45));
 			Customer c3=new Customer();
 			c3.setName("Sahithi");
 			c3.setCustomerId(3);
@@ -62,7 +62,7 @@ public class MyDataBaseCustomerUtil {
 			c3.setBloodGroup(BloodGroup.O_NEGATIE);
 			c3.setBloodGroupPrice(4000);
 			c3.setAge(25);
-			c3.setJoiningDate(LocalDateTime.of(2013, 12, 2, 10, 00, 12));
+			c3.setJoiningDateTime(LocalDateTime.of(2013, 12, 2, 10, 00, 12));
 			Customer c4=new Customer();
 			c4.setName("Sathwik");
 			c4.setCustomerId(4);
@@ -72,7 +72,7 @@ public class MyDataBaseCustomerUtil {
 			c4.setBloodGroup(BloodGroup.O_POSSITIE);
 			c4.setBloodGroupPrice(5000);
 			c4.setAge(30);
-			c4.setJoiningDate(LocalDateTime.of(2018, 6, 1, 12, 20, 58));
+			c4.setJoiningDateTime(LocalDateTime.of(2018, 6, 1, 12, 20, 58));
 			Customer c5=new Customer();
 			c5.setName("Geetha");
 			c5.setCustomerId(5);
@@ -82,7 +82,7 @@ public class MyDataBaseCustomerUtil {
 			c5.setBloodGroup(BloodGroup.O_NEGATIE);
 			c5.setBloodGroupPrice(6500);
 			c5.setAge(24);
-			c5.setJoiningDate(LocalDateTime.of(2019, 8, 28, 15, 30, 39));
+			c5.setJoiningDateTime(LocalDateTime.of(2019, 8, 28, 15, 30, 39));
 			listbox.add(c1);
 			listbox.add(c2);
 			listbox.add(c3);

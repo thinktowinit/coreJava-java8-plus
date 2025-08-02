@@ -15,12 +15,12 @@ public class Customer {
     private int bloodGroupPrice; 
     private int age;
     private List<String> familyMembers;
-    private LocalDateTime joiningDate;
-	public LocalDateTime getJoiningDate() {
-		return joiningDate;
+    private LocalDateTime joiningDateTime;
+	public LocalDateTime getJoiningDateTime() {
+		return joiningDateTime;
 	}
-	public void setJoiningDate(LocalDateTime joiningDate) {
-		this.joiningDate = joiningDate;
+	public void setJoiningDateTime(LocalDateTime joiningDateTime) {
+		this.joiningDateTime = joiningDateTime;
 	}
 	public int getCustomerId() {
 		return customerId;
