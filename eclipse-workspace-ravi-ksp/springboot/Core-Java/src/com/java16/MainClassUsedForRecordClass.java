@@ -7,6 +7,8 @@ public class MainClassUsedForRecordClass {
 		ClassWithRecordCustomImmutable classWithRecord = new ClassWithRecordCustomImmutable(1, "sdf", "sdfsd", "sdfds", 2);
 		System.out.println(classWithRecord.id());
 		System.out.println(classWithRecord.name());
+		
+		//classWithRecord.getId(), not used get word, why bcz record give bet methods with get word
 
 	}
 
