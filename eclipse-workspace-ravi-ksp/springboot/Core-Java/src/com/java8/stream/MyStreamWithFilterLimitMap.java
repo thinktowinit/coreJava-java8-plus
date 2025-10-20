@@ -175,10 +175,21 @@ public class MyStreamWithFilterLimitMap {
 
     private static void getDifferentEmployeeNames() {
         try {
-            maybeThrowRandomException();
-            List<Employee> listt = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
-            List<String> listOfNamess = listt.stream().map(Employee::getName).distinct().sorted().collect(Collectors.toList());
-            listOfNamess.forEach(System.out::println);
+             List<Employee> listt = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
+        	  List<String> listOfNames = Optional.ofNullable(listt)
+                      .orElseGet(Collections::emptyList) // handle null
+                      .stream()
+                      .map(Employee::getName)
+                      .filter(Objects::nonNull)
+                      .distinct()
+                      .sorted()
+                      .collect(Collectors.toList());
+
+              if (listOfNames.isEmpty()) {
+                  System.out.println("No data found");
+              } else {
+                  listOfNames.forEach(System.out::println);
+              }
         } catch (Exception e) {
             System.out.println("Exception in getDifferentEmployeeNames: " + e.getMessage());
         }
