@@ -197,9 +197,8 @@ public class MyStreamWithFilterLimitMap {
 
     private static void getDifferentEmployeesalaries() {
         try {
-          //  maybeThrowRandomException();
-        //    List<Employee> listt = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
-            List<Employee> listt = null;
+            maybeThrowRandomException();
+            List<Employee> listt = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
             List<Integer> listOfSalaries = listt.stream().map(Employee::getSalary).distinct().collect(Collectors.toList());
             listOfSalaries.forEach(System.out::println);
         } catch (Exception e) {
