@@ -15,626 +15,105 @@ import java.util.stream.Collectors;
 
 import com.enums.BloodGroup;
 
-public class MyStreamWithFilterLimitMapFarmer {
-	
-	private static final String METHOD_TITLE = "getFarmerDetailsWhoIsAdminAndYearlyIncomeGreaterThan30000 ============";
-	private static final String OUTPUT_FORMAT = "ID: %d, Name: %s, Income: ₹%.2f";
-	private static final String ERROR_MSG = "Getting Error while filtering admin farmers with income > 30000: ";
-	private static final String SUCCESS_MSG = "======[SUCCESS] First farmer name whose yearly income > 1000: ";
-	private static final String ERROR_MSG1 = "==========[ERROR] No farmer found or error occurred while fetching farmer name.";
-	
-	private static final String successMsg = "Success: Fetched max 3 farmers with experience > 1 year.";
-	private static final String headerMsg = "============= Experienced Farmers List =============";
-	private static final String errorPrefix = " Error occurred while fetching experienced farmers: ";
-	
-	private static final String SUCCESS_MSG12 = "=========== Farmer ID and Yearly Income List ===========";
-	private static final String ERROR_MSG12 = "============= No farmers found or an error occurred while fetching data.";
-	public static void main(String[] args) {
-		List<Farmer> list = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-		TaskOneMethods();
-		TaskTwoMethods();
+public class FarmerModuleWithErrors {
 
-		
-		
-		 LocalDate joiningDate = LocalDate.now().minusYears(4).minusMonths(2).minusDays(10);
-			Farmer farmer = new Farmer();
-			farmer.setName("UnKnown Person");
-			farmer.setJoiningDate(LocalDateTime.of(2024, 6, 28, 6, 55, 23));
-			calculateFarmerExperienceBasedOnJoiningDateAndTodayDate(farmer);
-
-			getFarmerJoiningDateFormatted();
-			getFarmerJoiningDateCustomFormatted();
-			getFarmerJoiningDateCustomPattern();
-         
-         
-         int[] farmerIds = {105, 101, 108, 103, 102, 106};
-         System.out.println("===========Performing Parallel Sorting==========");
-         System.out.println("Before Parallel Sort (IDs): " + Arrays.toString(farmerIds));
-         Arrays.parallelSort(farmerIds); 
-         System.out.println("After Parallel Sort (IDs): " + Arrays.toString(farmerIds));
-         
-         System.out.println();
-
-         String[] farmerNames = {"Ravi", "Anil", "Bhanu", "Suresh", "Kiran"};
-         System.out.println("Before Parallel Sort (Names): " + Arrays.toString(farmerNames));
-         Arrays.parallelSort(farmerNames);
-         System.out.println("After Parallel Sort (Names): " + Arrays.toString(farmerNames));
+    private static final String METHOD_TITLE = "getFarmerDetailsWhoIsAdminAndYearlyIncomeGreaterThan30000 ============";
+    private static final String OUTPUT_FORMAT = "ID: %d, Name: %s, Income: ₹%.2f";
+    private static final String ERROR_MSG = "Getting Error while filtering admin farmers with income > 30000: ";
+    private static final String SUCCESS_MSG = "======[SUCCESS] First farmer name whose yearly income > 1000: ";
     
-
-	}
-	
-
-	private static void TaskTwoMethods() {
-		System.out.println("=============Task2 methods=================");
-		getDifferentFarmerNames();
-		getDifferentFarmerIncomes();
-		getIncreasedFarmerIncomesBy10k();
-		getFarmersWithExperienceGreaterThan1Year();
-		GetFirstFarmerNamewhoseYearlyIncomeisgreaterthan1000();
-		GetFarmersIDAndYearlyIncome();
-		GetFarmersIDAndYearlyIncomeSortingBasedOnKey();
-		GetFarmerIDandYearlyIncomeAndApplySortingBasedOnValue();
-		GetFarmersNameAndYearlyIncomeAndApplySortingBasedOnName();
-	}
-
-
-	
-	private static void TaskOneMethods() {
-		System.out.println("==============Task1 methods=============");
-		List<Farmer> list = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-        getListOfFarmerNamesWhoseYearlyIncomeDividedBy3AndGetMax3Farmers(list);
-		getFarmerIdWhoseYearlyIncomeGreaterThan30000();
-		getFarmerNamesWhoIsAdminAndHisYearlyIncomeGreaterThan6000();
-		getFarmerDetailsWhoIsAdminAndYearlyIncomeGreaterThan30000();
-		getFarmerIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan10000();
-		getFarmerIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan10000();
-	}
-	
-	
-
-
-
-		/**
-		 * @param farmers
-		 * 
-		 * Task1.1. This is used for writing getListOfFarmerNamesWhoseYearlyIncomeDividedBy3AndGetMax3Farmers
-		 */
-		private static void getListOfFarmerNamesWhoseYearlyIncomeDividedBy3AndGetMax3Farmers(List<Farmer> farmers) {
-		    try {
-
-		        System.out.println("==== Farmers whose yearly income is divisible by 3 ====");
-
-		        List<String> listOfFarmerNames = farmers.stream()
-		                .filter(farmer -> farmer.getYearlyIncome() % 3 == 0)
-		                .limit(3)
-		                .map(Farmer::getName)
-		                .collect(Collectors.toList());
-
-		        listOfFarmerNames.forEach(System.out::println);
-
-		        System.out.println("Successfully fetched up to 3 farmers with yearly income divisible by 3.");
-		    } catch (Exception e) {
-		        System.err.println(" Error occurred while fetching farmer names: " + e.getMessage());
-		        e.printStackTrace();
-		    }
-		}
-
-		/**
-		 *Task1.2 Prints the names of farmers who are admins and have a yearly income greater than 6000.
-		 */
-		private static void getFarmerNamesWhoIsAdminAndHisYearlyIncomeGreaterThan6000() {
-			try {
-				Optional.ofNullable(MyDataBaseUtil.getListOfFarmers(new ArrayList<>()))
-					.filter(list -> !list.isEmpty())
-					.map(list -> list.stream()
-						.filter(farmer -> farmer.isAdmin() && farmer.getYearlyIncome() > 6000)
-						.map(Farmer::getName)
-						.toList())
-					.filter(list -> !list.isEmpty())
-					.ifPresent(names -> {
-						System.out.println("==== Admin farmers with yearly income > 6000 ====");
-						names.forEach(System.out::println);
-					});
-			} catch (Exception e) {
-				System.err.println("Error while filtering farmers: " + e.getMessage());
-				e.printStackTrace();
-			}
-		}
-	
-
-	/**
-	 *Task1.3) Prints the IDs of farmers whose yearly income is greater than 30,000.
-	 *
-	 * - Retrieves a list of Farmer objects from the database utility method. -
-	 * Filters the list to include only those with yearly income > 30,000. -
-	 * Extracts and prints the IDs of the matching farmers.
-	 *
-	 * This method does not return anything; it prints output to the console. In
-	 * case of an error, an appropriate message is printed.
-	 */
-	private static void getFarmerIdWhoseYearlyIncomeGreaterThan30000() {
-		try {
-			List<Farmer> list = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-
-			System.out.println("getFarmerIdWhoseYearlyIncomeGreaterThan30000 ============");
-
-			list.stream().filter(farmer -> farmer.getYearlyIncome() > 30000).map(Farmer::getId)
-					.collect(Collectors.toList()).forEach(System.out::println);
-
-		} catch (Exception e) {
-			System.out.println("Error while filtering farmers with income > 30000: " + e.getMessage());
-		}
-	}
-
-	/**
-	 * Task1.4)This method filters and prints details of farmers who are admins and earn more than ₹30,000 yearly.
-	 *
-	 * <p><b>Operations Performed:</b></p>
-	 * <ul>
-	 *   <li>Fetches a list of farmers from the database utility class.</li>
-	 *   <li>Applies a filter for farmers with isAdmin = true and yearly income > 30,000.</li>
-	 *   <li>Prints their ID, Name, and Income using formatted output.</li>
-	 * </ul>
-	 *
-	 * <p><b>Note:</b> Exception handling is applied to catch and log any runtime issues.</p>
-	 */
-	private static void getFarmerDetailsWhoIsAdminAndYearlyIncomeGreaterThan30000() {
-	    try {
-	        List<Farmer> list = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-
-	        System.out.println(METHOD_TITLE);
-
-	        list.stream()
-	            .filter(farmer -> farmer.isAdmin() && farmer.getYearlyIncome() > 30000)
-	            .map(farmer -> String.format(OUTPUT_FORMAT, farmer.getId(), farmer.getName(), farmer.getYearlyIncome()))
-	            .forEach(System.out::println);
-
-	    } catch (Exception e) {
-	        System.out.println(ERROR_MSG + e.getMessage());
-	    }
-	}
-
-	/**
-	 *Task1.5 Prints the IDs of farmers whose blood group is "O Negative" 
-	 * and whose blood group price is less than 30000.
-	 *
-	 * - Retrieves a list of Farmer objects from the database.
-	 * - Filters the list where:
-	 *     - blood group is not null
-	 *     - blood group equals "O Negative" (case-insensitive)
-	 *     - blood group price is less than 10000
-	 * - Extracts and prints the farmer IDs.
-	 *
-	 * This method is for logging and debugging. It does not return any value.
-	 * If any exception occurs, it will be caught and printed.
-	 */
-	
-	private static void getFarmerIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan10000() {
-	    try {
-	        List<Farmer> list = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-
-	        System.out.println("getFarmerIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan10000===========");
-
-	        List<Integer> listOfFarmerIds = list.stream()
-	            .filter(farmer -> farmer.getBloodGroup() == BloodGroup.	O_NEGATIE &&
-	                              farmer.getBloodGroupPrice() < 10000)
-	            .map(Farmer::getId)
-	            .collect(Collectors.toList());
-
-	        listOfFarmerIds.forEach(System.out::println);
-
-	    } catch (Exception e) {
-	        System.out.println("Error while filtering farmers by O Negative and blood price < 10000: " + e.getMessage());
-	    }
-	}
-
-	
-	
-	
-	/**
-	 * Task1.6 This method fetches a list of farmers and filters those who:
-	 * - Have Blood Group as O_NEGATIVE (Enum-based comparison)
-	 * - Have blood group price less than 10000
-	 *
-	 * It prints the ID and Name of matching farmers to the console.
-	 *
-	 * Input: 
-	 *   - The method internally calls MyDataBaseUtil.getListOfFarmers() which returns a list of Farmer objects.
-	 *
-	 * Output:
-	 *   - No return value.
-	 *   - Prints formatted string of ID and Name of farmers who match the conditions.
-	 *
-	 * Example Output:
-	 *   ID: 101, Name: Ramesh
-	 *   ID: 104, Name: Sita
-	 */
-	private static void getFarmerIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan10000() {
-	    try {
-	        List<Farmer> list = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-
-	        System.out.println("getFarmerIdsWithNameWhoseBloddGroupIsONegativeAndBloodPriceLessThan10000===========");
-
-	        List<String> result = list.stream()
-	            .filter(farmer -> farmer.getBloodGroup() == BloodGroup.	O_NEGATIE &&
-	                              farmer.getBloodGroupPrice() < 10000)
-	            .map(farmer -> "ID: " + farmer.getId() + ", Name: " + farmer.getName())
-	            .collect(Collectors.toList());
-
-	        result.forEach(System.out::println);
-
-	    } catch (Exception e) {
-	        System.out.println("Error while filtering farmers by O Negative and blood price < 10000: " + e.getMessage());
-	    }
-	}
-	
-	
-	
-	/**
-	 * Task2.1.This method is used to get different farmer names from the database.
-	 */
-	private static void getDifferentFarmerNames() {
-		try {
-			List<Farmer> listOfFarmers = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-
-			Optional.ofNullable(listOfFarmers)
-				.filter(list -> !list.isEmpty())
-				.map(list -> list.stream()
-					.map(Farmer::getName)
-					.filter(Objects::nonNull)
-					.distinct()
-					.collect(Collectors.toList()))
-				.ifPresent(names -> {
-					System.out.println("Successfully retrieved unique farmer names:");
-					names.forEach(System.out::println); 
-				});
-
-		} catch (Exception e) {
-			System.out.println(" Failed to fetch farmer names due to error: " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Task2.2.This method is used to get different farmer yearly incomes from the database.
-	 */
-	private static void getDifferentFarmerIncomes() {
-		try {
-			List<Farmer> listOfFarmers = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-
-			Optional.ofNullable(listOfFarmers)
-				.filter(list -> !list.isEmpty())
-				.ifPresent(list -> {
-					List<Double> incomeList = list.stream()
-						.map(Farmer::getYearlyIncome)
-						.filter(Objects::nonNull)
-						.distinct()
-						.collect(Collectors.toList());
-
-					System.out.println("=========== Successfully retrieved unique farmer yearly incomes:");
-					incomeList.forEach(System.out::println);
-				});
-
-		} catch (Exception e) {
-			System.out.println("=========== Failed to fetch farmer incomes due to error: " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Task2.3.This method is used to get farmer salaries after increasing every salary by 10,000.
-	 */
-	private static void getIncreasedFarmerIncomesBy10k() {
-		try {
-			List<Farmer> listOfFarmers = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-
-			Optional.ofNullable(listOfFarmers)
-				.filter(list -> !list.isEmpty())
-				.ifPresent(list -> {
-					List<Double> updatedIncomeList = list.stream()
-						.map(Farmer::getYearlyIncome)
-						.filter(Objects::nonNull)
-						.map(income -> income + 10000) // Add ₹10,000
-						.distinct()
-						.collect(Collectors.toList());
-
-					System.out.println("============= Increased farmer incomes by ₹10,000:");
-					updatedIncomeList.forEach(System.out::println);
-				});
-
-		} catch (Exception e) {
-			System.err.println("============= Error while increasing farmer incomes: " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Task2.4. This method fetches a maximum of 3 farmers whose experience is greater than 1 year.
-	 * It uses Java 8 features including Optional and Stream API.
-	 */
-	private static void getFarmersWithExperienceGreaterThan1Year() {
-		try {
-			List<Farmer> farmersList = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
-
-			Optional.ofNullable(farmersList).filter(list -> !list.isEmpty())
-					.map(list -> list.stream().filter(farmer -> Optional.ofNullable(farmer.getJoiningDate())
-							.map(joiningDate -> Period.between(joiningDate.toLocalDate(), LocalDate.now()).getYears())
-							.filter(years -> years > 1).isPresent()).limit(3).collect(Collectors.toList()))
-					.filter(filteredList -> !filteredList.isEmpty()).ifPresent(experiencedFarmers -> {
-						System.out.println(successMsg);
-						System.out.println(headerMsg);
-						experiencedFarmers.forEach(farmer -> {
-							String output = "id=" + farmer.getId() + ", name='" + farmer.getName() + "'"
-									+ ", joiningDate=" + farmer.getJoiningDate();
-							System.out.println(output);
-						});
-					});
-
-		} catch (Exception e) {
-			String errorMsg = " Error occurred while fetching experienced farmers: " + e.getMessage();
-			System.err.println(errorMsg);
-			e.printStackTrace();
-		}
-	}
-
-
-	/**
-	 *Task2. 5.This method fetches the first farmer name whose yearly income is greater than 1000.
-	 */
-	private static void GetFirstFarmerNamewhoseYearlyIncomeisgreaterthan1000() {
-		
-
-		try {
-			Optional.ofNullable(MyDataBaseUtil.getListOfFarmers(new ArrayList<>()))
-				.filter(list -> !list.isEmpty())
-				.map(list -> list.stream()
-					.filter(farmer -> farmer.getYearlyIncome() > 1000)
-					.map(Farmer::getName)
-					.findFirst())
-				.flatMap(farmerNameOpt -> farmerNameOpt)
-				.ifPresentOrElse(
-					name -> System.out.println(SUCCESS_MSG + name),
-					() -> System.out.println(ERROR_MSG)
-				);
-
-		} catch (Exception e) {
-			System.out.println(ERROR_MSG);
-		}
-	}
-	
-	/**
-	 * Task2.6. This method prints the ID and yearly income of all farmers from the
-	 * database. It uses Optional, Stream API, and SimpleEntry for clean and safe
-	 * data processing. Java 8 compatible and clean.
-	 * 
-	 * Convert each Farmer object into a key-value pair using
-	 * AbstractMap.SimpleEntry where the key is the Farmer's ID and the value is the
-	 * Farmer's Yearly Income. This allows us to work with paired data (ID → Income)
-	 * without creating a custom class. AbstractMap.SimpleEntry is a convenient
-	 * built-in way to represent a Map.Entry<K, V> structure.
-	 */
-	private static void GetFarmersIDAndYearlyIncome() {
-
-	    try {
-	        Optional.ofNullable(MyDataBaseUtil.getListOfFarmers(new ArrayList<>()))
-	            .filter(farmers -> !farmers.isEmpty())
-	            .ifPresentOrElse(farmers -> {
-	                System.out.println(SUCCESS_MSG12);
-	                farmers.stream()
-	                    .map(farmer -> new AbstractMap.SimpleEntry<>(farmer.getId(), farmer.getYearlyIncome()))
-	                    .map(entry -> String.format("Farmer ID: %d, Yearly Income: ₹%.2f", entry.getKey(), entry.getValue()))
-	                    .forEach(System.out::println);
-	            }, () -> System.out.println(ERROR_MSG12));
-
-	    } catch (Exception e) {
-	        System.out.println(ERROR_MSG12);
-	    }
-	}
-	
-
-	
-	
-	/**
-	 * Task2.7.This method fetches a list of farmers from the database and displays their
-	 * IDs and Yearly Income in sorted order based on the ID.
-	 * 
-	 * Key Java 8 features used:
-	 * - Optional: to handle null safely
-	 * - filter(): to skip empty lists
-	 * - map(): to transform Farmer objects into custom "ID = Income" strings
-	 * - sorted(): to sort Farmer objects based on ID
-	 * - forEach(): to print the result using a method reference
-	 */
-	private static void GetFarmersIDAndYearlyIncomeSortingBasedOnKey() {
-	    try {
-	        Optional.ofNullable(MyDataBaseUtil.getListOfFarmers(new ArrayList<>()))
-	                .filter(list -> !list.isEmpty())
-	                .ifPresent(farmers -> {
-
-	                    System.out.println("=========== Successfully displayed all Farmer IDs with Yearly Incomes sorting Basedonkey or id ===========");
-	                    farmers.stream()
-	                           .sorted(Comparator.comparing(Farmer::getId))
-	                           .map(farmer -> farmer.getId() + " = " + farmer.getYearlyIncome())
-	                           .forEach(System.out::println);
-
-	                });
-	    } catch (Exception e) {
-	        System.out.println("============= No farmers found or an error occurred while fetching data. =============");
-	    }
-	}
-	
-	
-	/**
-	 *Task2. 8.This method fetches a list of farmers and displays their
-	 * IDs and Yearly Incomes sorted in ascending order based on income.
-	 *
-	 * Java 8 Features Used:
-	 * - Optional: to handle nulls safely
-	 * - filter(): to skip empty lists
-	 * - stream(): to process collection
-	 * - sorted(): to sort by income (value)
-	 * - map(): to format output
-	 * - forEach(): with method reference to print
-	 */
-	private static void GetFarmerIDandYearlyIncomeAndApplySortingBasedOnValue() {
-	    try {
-	    	
-	    	System.out.println("=========== Successfully displayed Farmer IDs sorted by Yearly Income ===========");
-	        Optional.ofNullable(MyDataBaseUtil.getListOfFarmers(new ArrayList<>()))
-	                .filter(list -> !list.isEmpty())
-	                .ifPresent(farmers -> {
-	                   
-	                    farmers.stream()
-	                           .sorted(Comparator.comparing(Farmer::getYearlyIncome)) 
-	                           .map(farmer -> farmer.getId() + " = " + farmer.getYearlyIncome())
-	                           .forEach(System.out::println); 
-
-	                });
-	    } catch (Exception e) {
-	        System.out.println("============= No farmers found or an error occurred while fetching data. =============");
-	    }
-	}
-
-	
-	/**
-	 * Task2.9.This method fetches a list of farmers and prints their names along with yearly income,
-	 * sorted in ascending order by farmer name.
-	 *
-	 * Java 8 Features Used:
-	 * - Optional: to safely handle null lists
-	 * - Stream API: to process and sort the list
-	 * - Comparator.comparing(): for sorting
-	 * - Lambda expressions and method references
-	 */
-	private static void GetFarmersNameAndYearlyIncomeAndApplySortingBasedOnName() {
-	    try {
-	    	 System.out.println("=========== Successfully displayed Farmer Names and Yearly Incomes sorted by Name ===========");
-
-	        Optional.ofNullable(MyDataBaseUtil.getListOfFarmers())
-	                .filter(list -> !list.isEmpty())
-	                .ifPresent(farmers -> 
-	                    farmers.stream()
-	                           .sorted(Comparator.comparing(Farmer::getName))
-	                           .map(farmer -> farmer.getName() + " = " + farmer.getYearlyIncome())
-	                           .forEach(System.out::println)
-	                );
-
-
-	    } catch (Exception e) {
-	        System.out.println("============= Error occurred while fetching or processing farmer data =============");
-	        e.printStackTrace(); 
-	    }
-	}
-	
-	//Task2. 10.Farmer class assumed to have fields: name, joiningDate
-		//Method to calculate experience using LocalDateTime and Optional
-		private static void calculateFarmerExperienceBasedOnJoiningDateAndTodayDate(Farmer farmer) {
-		    Optional.ofNullable(farmer.getJoiningDate()).ifPresentOrElse(joinDateTime -> {
-		        try {
-		            LocalDate joinDate = joinDateTime.toLocalDate();
-		            LocalDate today = LocalDate.now();
-
-		            Period experience = Period.between(joinDate, today);
-
-		            System.out.println("========Success: Experience calculated for farmer: " + farmer.getName());
-		            System.out.println("Farmer Name: " + farmer.getName());
-		            System.out.println("Experience: " + experience.getYears() + " years, " 
-		                               + experience.getMonths() + " months, " 
-		                               + experience.getDays() + " days.");
-		        } catch (Exception e) {
-		            System.out.println("Error occurred while calculating experience for farmer: " + farmer.getName());
-		            e.printStackTrace();
-		        }
-		    }, () -> {
-		        System.out.println("Error: Joining date is not available for farmer: " + farmer.getName());
-		    });
-		}
-
-		/**
-		 * Task2.11. This method prints the farmer's joining date in the format "yyyy-MM-dd
-		 * HH:mm:ss". It checks the availability of the joining date using Optional. If
-		 * the date is absent, it logs an error. If present, it formats and prints the
-		 * joining date.
-		 */
-		private static void getFarmerJoiningDateFormatted() {
-			
-				LocalDateTime joiningDateTime = LocalDateTime.of(2024, 6, 28, 6, 55, 23);
-
-				Optional.ofNullable(joiningDateTime).ifPresentOrElse(date -> {
-					try {
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-						String formattedDate = date.format(formatter);
-
-						System.out.println("============ Getting FarmerJoiningDateFormatted");
-						System.out.println("Joining Date: " + formattedDate);
-					} catch (Exception e) {
-						System.out.println("Error occurred while formatting joining date.");
-						e.printStackTrace();
-					}
-				}, () -> {
-					System.out.println("Error: Joining date is not available for farmer.");
-				});
-			}
-		
-		
-		
-
-		/**
-		 *Task2. 12.This method formats and displays a farmer's joining date in the following
-		 * pattern: "yyyy-MMMM-dd HH:mm:ss" → Example: 2024-June-28 06:55:23
-		 * 
-		 * - Uses Java 8's LocalDateTime, Optional, and DateTimeFormatter. - Simulates
-		 * the joining date for demonstration purposes. - Safely handles null using
-		 * Optional.
-		 */
-		private static void getFarmerJoiningDateCustomFormatted() {
-			
-				LocalDateTime joiningDateTime = LocalDateTime.of(2024, 6, 28, 6, 55, 23);
-
-				Optional.ofNullable(joiningDateTime).ifPresentOrElse(date -> {
-					try {
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMMM-dd HH:mm:ss");
-
-						String formattedDate = date.format(formatter);
-						System.out.println("=======getFarmerJoiningDateCustomFormatted");
-						System.out.println("Joining Date: " + formattedDate);
-
-					} catch (Exception e) {
-						System.out.println("Error occurred while formatting the joining date.");
-						e.printStackTrace();
-					}
-				}, () -> {
-					System.out.println("Error: Joining date is not available for farmer.");
-				});
-			}
-		
-		
-		
-		/**
-		 *Task2.13. This method prints the farmer's joining date in the format: "dd-MMMM-yyyy
-		 * HH:mm:ss" Example Output: 28-June-2024 06:55:23
-		 */
-		private static void getFarmerJoiningDateCustomPattern() {
-		
-				LocalDateTime joiningDateTime = LocalDateTime.of(2024, 6, 28, 6, 55, 23);
-
-				Optional<LocalDateTime> optionalJoiningDate = Optional.ofNullable(joiningDateTime);
-
-				optionalJoiningDate.ifPresentOrElse(date -> {
-					try {
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss");
-						String formattedDate = date.format(formatter);
-
-						System.out.println("======= getFarmerJoiningDateCustomPattern =======");
-						System.out.println("Joining Date: " + formattedDate);
-					} catch (Exception e) {
-						System.out.println("Error occurred while formatting the joining date.");
-						e.printStackTrace();
-					}
-				}, () -> {
-					System.out.println("Error: Joining date is not available for farmer.");
-				});
-			}
+    public static void main(String[] args) {
+        List<Farmer> list = MyDataBaseUtil.getListOfFarmers(new ArrayList<>());
+
+        TaskOneMethods();
+        TaskTwoMethods();
+
+        // Inject runtime exception
+        int zero = 0;
+        int crash = 5 / zero; // ArithmeticException
+
+        LocalDate joiningDate = LocalDate.now().minusYears(4);
+        Farmer farmer = new Farmer();
+        farmer.setName(null); // Will cause NullPointerException in experience calculation
+        farmer.setJoiningDate(LocalDateTime.of(2024, 6, 28, 6, 55, 23));
+        calculateFarmerExperience(farmer);
+
+        int[] farmerIds = {105, 101, 108, 103, 102, 106};
+        Arrays.parallelSort(farmerIds); // OK
+
+        String[] farmerNames = {"Ravi", "Anil", null, "Suresh", "Kiran"};
+        Arrays.parallelSort(farmerNames); // NullPointerException possible
+    }
+
+    private static void TaskTwoMethods() {
+        getDifferentFarmerNames();          // 1. NullPointerException injected inside
+        getDifferentFarmerIncomes();        // 2. RuntimeException injected
+        getIncreasedFarmerIncomesBy10k();   // 3. ArithmeticException injected
+        getFarmersWithExperienceGreaterThan1Year(); // 4. NullPointerException injected
+        getFirstFarmerNameAbove1000();      // 5. IndexOutOfBoundsException injected
+        getFarmersIDAndIncome();            // 6. RuntimeException
+        getFarmersIDAndIncomeSortedById();  // 7. NullPointerException
+        getFarmersIDAndIncomeSortedByIncome(); // 8. ClassCastException injected
+        getFarmersNameAndIncomeSortedByName(); // 9. RuntimeException
+        calculateFarmerExperienceWithError();  // 10. NullPointerException
+    }
+
+    private static void TaskOneMethods() {
+        getFarmerNamesIncomeDivBy3Limit3();           // 11. ArithmeticException injected
+        getFarmerIdAbove30000();                      // 12. NullPointerException
+        getFarmerAdminIncomeAbove6000();             // 13. RuntimeException
+        getFarmerAdminIncomeAbove30000();            // 14. ClassCastException
+        getFarmerIdsBloodONegativeBelow10000();      // 15. NullPointerException
+        getFarmerIdsNameBloodONegativeBelow10000();  // 16. RuntimeException
+        throw new RuntimeException("Injected exception 17"); // 17. direct runtime
+        throw new NullPointerException("Injected exception 18"); // 18. direct null
+        throw new IndexOutOfBoundsException("Injected exception 19"); // 19. direct index
+        throw new ArithmeticException("Injected exception 20"); // 20. direct arithmetic
+    }
+
+    // Example methods (simplified) with injected exceptions
+    private static void getDifferentFarmerNames() {
+        List<Farmer> farmers = MyDataBaseUtil.getListOfFarmers(null); // NPE injected
+        farmers.stream().map(Farmer::getName).distinct().forEach(System.out::println);
+    }
+
+    private static void getDifferentFarmerIncomes() {
+        throw new RuntimeException("Injected runtime error"); // intentional
+    }
+
+    private static void getIncreasedFarmerIncomesBy10k() {
+        int x = 5 / 0; // ArithmeticException
+    }
+
+    private static void getFarmersWithExperienceGreaterThan1Year() {
+        List<Farmer> farmers = MyDataBaseUtil.getListOfFarmers(null); // NPE injected
+        farmers.forEach(f -> System.out.println(f.getName()));
+    }
+
+    private static void getFirstFarmerNameAbove1000() {
+        List<Farmer> farmers = new ArrayList<>();
+        System.out.println(farmers.get(0).getName()); // IndexOutOfBoundsException
+    }
+
+    private static void getFarmersIDAndIncome() { throw new RuntimeException(); }
+    private static void getFarmersIDAndIncomeSortedById() { throw new NullPointerException(); }
+    private static void getFarmersIDAndIncomeSortedByIncome() { throw new ClassCastException(); }
+    private static void getFarmersNameAndIncomeSortedByName() { throw new RuntimeException(); }
+    private static void calculateFarmerExperienceWithError() { 
+        Farmer farmer = new Farmer(); farmer.setJoiningDate(null); // NPE
+        System.out.println(farmer.getJoiningDate().toLocalDate());
+    }
+    
+    // Task1 methods simplified
+    private static void getFarmerNamesIncomeDivBy3Limit3() { int y = 1 / 0; }
+    private static void getFarmerIdAbove30000() { List<Farmer> farmers = null; farmers.size(); }
+    private static void getFarmerAdminIncomeAbove6000() { throw new RuntimeException(); }
+    private static void getFarmerAdminIncomeAbove30000() { throw new ClassCastException(); }
+    private static void getFarmerIdsBloodONegativeBelow10000() { List<Farmer> farmers = null; farmers.get(0); }
+    private static void getFarmerIdsNameBloodONegativeBelow10000() { throw new RuntimeException(); }
+    
+    private static void calculateFarmerExperience(Farmer farmer) {
+        int crash = 10 / 0; // ArithmeticException
+    }
 
 }
