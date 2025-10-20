@@ -11,16 +11,17 @@ public class Java11WriteStringAndReadString {
 	public static void main(String[] args) {
 		// Initializing file Path with some conditions
 		
-		Path filePath = Paths.get("C:\\Users\\ADMIN\\Documents\\java11", "write-data2.txt");
+		Path filePath = Paths.get("C:\\Users\\think\\OneDrive\\Documents\\Back-end\\Java-8\\Java-11", "write-data2.txt");
 
 		try {
 			// Write content to file
-			Files.writeString(filePath, "Writing in to a file using java11 feature", StandardOpenOption.APPEND);
+			Files.writeString(filePath, "Writing into a file using Java 11 feature\n", StandardOpenOption.APPEND);
 
+			System.out.println("writing in to file success");
 			// Verify file content
-			String content = Files.readString(filePath);
-
-			System.out.println(content);
+			String dataFromFile = Files.readString(filePath);
+			System.out.println("reading from file success");
+			System.out.println(dataFromFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

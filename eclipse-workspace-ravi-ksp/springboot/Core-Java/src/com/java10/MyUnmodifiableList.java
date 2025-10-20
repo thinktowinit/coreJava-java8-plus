@@ -11,12 +11,12 @@ public class MyUnmodifiableList {
 
 	public static void main(String[] args) {
 
-		List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
+		List<Employee> mutableList = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
 
-		List<String> listNames = list.stream().filter(emp -> emp.getAge() > 18).map(Employee::getName)
+		List<String> immutableListOfNames = mutableList.stream().filter(emp -> emp.getAge() > 18).map(Employee::getName)
 				.collect(Collectors.toUnmodifiableList());
-
-		listNames.add("aa");
+System.out.println("immutableListOfNames "+immutableListOfNames);
+		immutableListOfNames.add("aa"); //Exception in thread "main" java.lang.UnsupportedOperationException
 	}
 
 }

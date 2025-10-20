@@ -13,4 +13,6 @@ public class CoreJavaConstants {
 	public static final String YEARS = "years";
 	public static final String MONTHS = "months";
 	public static final String DAYS = "days";
+	public static final int NAME_LENGTH = 6;
+	public static final String O_NEGATIVE = "ONegative";
 }

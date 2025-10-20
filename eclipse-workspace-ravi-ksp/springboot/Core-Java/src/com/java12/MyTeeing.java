@@ -3,6 +3,7 @@ package com.java12;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.collections.arraylistcode.MyDataBaseUtil;
@@ -33,7 +34,10 @@ public class MyTeeing {
 	                  Collectors.maxBy(Comparator.comparing(Employee::getAge)),
 	                  Collectors.minBy(Comparator.comparing(Employee::getAge)),
 	                  (s,l) -> new GetSmallLongWords(s.get().getAge(), l.get().getAge())));
-		
+		//s.get().getAge()
+		//Optional<Employee>  = s
+		//Employee emp = s.get();
+		//int age = s.get().getAge();
 		System.out.println("agesData"+agesData);
 		
 	}

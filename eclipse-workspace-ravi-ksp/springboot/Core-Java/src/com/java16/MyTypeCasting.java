@@ -40,8 +40,8 @@ public class MyTypeCasting {
 			int price = veh.getPrice();
 			return price;
 		} else if (vehicle instanceof Bus) {
-			Bus veh = (Bus) vehicle; // type cast
-			int price = veh.getPrice();
+			Bus bus = (Bus) vehicle; // type cast
+			int price = bus.getPrice();
 			return price;
 		}
 
@@ -61,9 +61,9 @@ public class MyTypeCasting {
 			// Car veh = (Car) vehicle; // type cast
 			int price = veh.getPrice();
 			return price;
-		} else if (vehicle instanceof Bus veh) {
-			// Bus veh = (Bus) vehicle; // type cast
-			int price = veh.getPrice();
+		} else if (vehicle instanceof Bus bus) {
+			// Bus bus = (Bus) vehicle; // type cast
+			int price = bus.getPrice();
 			return price;
 		}
 

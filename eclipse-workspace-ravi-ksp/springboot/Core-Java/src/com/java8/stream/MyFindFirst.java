@@ -22,10 +22,20 @@ public class MyFindFirst {
 		// TODO Auto-generated method stub
 		List<Employee> list = MyDataBaseUtil.getListOfEmployees(new ArrayList<>());
 
-		Optional<Integer> singleId = list
-				.stream().filter(emp -> (emp.getBloodGroup() != null
-						&& "ONegative".equalsIgnoreCase(emp.getBloodGroup()) && emp.getBloodGroupPrice() < 6000))
-				.map(emp -> emp.getId()).findFirst();
+		Optional<Integer> singleId = 
+				list.stream()
+				    .filter(emp -> (emp.getBloodGroup() != null && "ONegative".equalsIgnoreCase(emp.getBloodGroup()) && emp.getBloodGroupPrice() < 6000))
+				    .map(emp -> emp.getId())
+				    .findFirst();
+		
+		Optional<Integer> firstEmpIdWhoseSalGt5000Optional = 
+				list.stream()
+				    .filter(emp -> (emp.getSalary() > 5000))
+				    .map(emp -> emp.getId())
+				    .findFirst();
+		
+		int empId = firstEmpIdWhoseSalGt5000Optional.get();
+		
 		System.out.println("getEmpIdsWhoseBloddGroupIsONegativeAndBloodPriceLessThan6000===========");
 		//for get alue from Optional use  .get() method
 		System.out.println(singleId.get());

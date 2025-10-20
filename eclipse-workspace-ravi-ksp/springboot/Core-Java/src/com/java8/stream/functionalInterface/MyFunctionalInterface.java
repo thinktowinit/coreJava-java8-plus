@@ -9,5 +9,10 @@ public interface MyFunctionalInterface {
 
 		return 2 * 5; //deeloped method
 	}
+	
+    static int multiplicationStatic() {
+
+		return 2 * 5; //deeloped method
+	}
 
 }

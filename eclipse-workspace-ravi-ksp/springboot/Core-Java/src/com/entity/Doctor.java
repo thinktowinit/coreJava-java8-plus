@@ -1,96 +1,101 @@
-package com.employee;
+package com.entity;
 
 import java.time.LocalDate;
 import java.util.List;
 
-//@getterssetters
-public class Employee {
+public class Doctor {
 
 	private int id;
 	private String name;
 	private int salary;
 	private String gender;
-	
-	
-
-	public LocalDate getJoiningDate() {
-
-		return joiningDate;
-	}
-	public void setJoiningDate(LocalDate joiningDate) {
-		this.joiningDate = joiningDate;
-	}
 	private boolean isAdmin;
 	private String bloodGroup;
 	private int bloodGroupPrice;
 	private int age;
-	
 
-	//private LocalDate joiningDatee;
-    private LocalDate joiningDate;
+	private LocalDate joiningDate;
 
-	private List<String> frindNames;
-	//private LocalDate joiningDate;
-	
-	
-	
-	
-	public int getId() {
-		return id;
+	public void setJoiningDate(LocalDate joiningDate) {
+		this.joiningDate = joiningDate;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	private List<String> friendNames;
+
+	public List<String> getFriendNames() {
+		return friendNames;
 	}
-	public String getName() {
-		return name;
+
+	public void setFriendNames(List<String> friendNames) {
+		this.friendNames = friendNames;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getSalary() {
-		return salary;
-	}
-	public void setSalary(int salary) {
-		this.salary = salary;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {  
-		this.gender = gender;
-	}
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-	public String getBloodGroup() {
-		return bloodGroup;
-	}
-	public void setBloodGroup(String bloodGroup) {
-		this.bloodGroup = bloodGroup;
-	}
-	public int getBloodGroupPrice() {
-		return bloodGroupPrice;
-	}
-	public void setBloodGroupPrice(int bloodGroupPrice) {
-		this.bloodGroupPrice = bloodGroupPrice;
-	}
-	public int getAge() {
+
+	public Integer getAge() {
 		return age;
 	}
+
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public List<String> getFrindNames() {
-		return frindNames;
-	}
-	public void setFrindNames(List<String> frindNames) {
-		this.frindNames = frindNames;
-	}
-	
 
-	
-	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public String getBloodGroup() {
+		return bloodGroup;
+	}
+
+	public void setBloodGroup(String bloodGroup) {
+		this.bloodGroup = bloodGroup;
+	}
+
+	public int getBloodGroupPrice() {
+		return bloodGroupPrice;
+	}
+
+	public void setBloodGroupPrice(int bloodGroupPrice) {
+		this.bloodGroupPrice = bloodGroupPrice;
+	}
+
+	public LocalDate getJoiningDate() {
+		return joiningDate;
+	}
+
 }

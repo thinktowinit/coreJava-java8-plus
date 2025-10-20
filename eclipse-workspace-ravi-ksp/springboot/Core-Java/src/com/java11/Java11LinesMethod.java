@@ -10,5 +10,8 @@ public class Java11LinesMethod {
 		String str = "Geeks\nFor\nGeeks\nGeeks\nFor\nGeeks";
 		List<String> listOfStrings = str.lines().collect(Collectors.toList());
 		System.out.println(str.lines().collect(Collectors.toList()));
+		
+		
+	
 	}
 }
